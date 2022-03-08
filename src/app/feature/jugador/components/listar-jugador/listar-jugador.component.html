@@ -1,0 +1,18 @@
+<p>listar-jugador works!</p>
+<div id="elementos">
+  <p>
+    <select name="miselect" [(ngModel)]="seleccionado" (change)="elegirPosicion($event.target.value)">
+    <option [value]="item" *ngFor="let item of listaPosiciones">
+      {{item}}
+    </option>
+    </select>
+  </p>
+</div>
+<div id="jugadores">
+  <ul class="jugadores">
+    <li *ngFor="let item of listaJugadores | async">
+      <span>{{item.id}}</span> {{item.nombre}} {{item.apellido}} {{item.altura}} {{item.peso}} {{item.posicion}}
+      {{item.fechaNacimiento}}
+    </li>
+  </ul>
+</div>
