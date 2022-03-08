@@ -10,32 +10,51 @@ import { JugadorService } from '../../shared/service/jugador.service';
 })
 export class ListarJugadorComponent implements OnInit {
   public listaJugadores: Observable<Jugador[]>;
+  listaGeneral:string[]=["Listar todos", "Equipo aleatorio", "Listar por posicion", "Listar por pie habil"];
   listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
+  listaPieHabil:string[]=["Derecho", "Izquierdo"];
   seleccionado: string;
+  seleccionadoPosicion: string;
+  seleccionadoPieHabil: string;
+  mostrarDatosPosicion: Boolean;
+  mostrarDatosPieHabil: Boolean;
 
   constructor(protected jugadorService: JugadorService) { }
 
   ngOnInit(){
-    this.elegirTipoDeLista(3);
+    this.elegirTipoDeLista(this.seleccionado);
   }
 
-  elegirTipoDeLista(bandera: number){
-    if (bandera === 1){
+  elegirTipoDeLista(bandera: string){
+    if (bandera === "Listar todos"){
+      this.mostrarDatosPosicion = false;
+      this.mostrarDatosPieHabil = false;
       return this.listaJugadores = this.jugadorService.consultar();
-    } else if (bandera === 2){
+    } else if (bandera === "Equipo aleatorio"){
+      this.mostrarDatosPosicion = false;
+      this.mostrarDatosPieHabil = false;
       return this.listaJugadores = this.jugadorService.equipoAleatorio();
-    } else if (bandera === 3){
-      return this.elegirPosicion(this.seleccionado);
-    } else if (bandera === 4){
-      return this.listaJugadores = this.jugadorService.listarPorPieHabil("");
+    } else if (bandera === "Listar por posicion"){
+      this.mostrarDatosPosicion = true;
+      this.mostrarDatosPieHabil = false;
+      return this.elegirPosicion(this.seleccionadoPosicion);
+    } else if (bandera === "Listar por pie habil"){
+      this.mostrarDatosPieHabil = true;
+      this.mostrarDatosPosicion = false;
+      return this.elegirPieHabil(this.seleccionadoPieHabil);
     } else {
       console.log("No permitido");
     }
   }
 
   elegirPosicion(value: any){
-    this.seleccionado = value;
+    this.seleccionadoPosicion = value;
     return this.listaJugadores = this.jugadorService.listarPorPosicion(value);
+  }
+
+  elegirPieHabil(value: any){
+    this.seleccionadoPieHabil = value;
+    return this.listaJugadores = this.jugadorService.listarPorPieHabil(value);
   }
 
 }

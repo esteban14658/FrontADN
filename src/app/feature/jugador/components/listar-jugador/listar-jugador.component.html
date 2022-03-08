@@ -1,12 +1,34 @@
 <p>listar-jugador works!</p>
 <div id="elementos">
   <p>
-    <select name="miselect" [(ngModel)]="seleccionado" (change)="elegirPosicion($event.target.value)">
-    <option [value]="item" *ngFor="let item of listaPosiciones">
+    <select name="miselect" [(ngModel)]="seleccionado" (change)="elegirTipoDeLista($event.target.value)">
+    <option [value]="item" *ngFor="let item of listaGeneral">
       {{item}}
     </option>
     </select>
   </p>
+</div>
+<div *ngIf="mostrarDatosPosicion">
+  <div id="elementosPosicion">
+    <p>
+      <select name="miselect" [(ngModel)]="seleccionadoPosicion" (change)="elegirPosicion($event.target.value)">
+      <option [value]="item" *ngFor="let item of listaPosiciones">
+        {{item}}
+      </option>
+      </select>
+    </p>
+  </div>
+</div>
+<div *ngIf="mostrarDatosPieHabil">
+  <div id="elementosPosicion">
+    <p>
+      <select name="miselect" [(ngModel)]="seleccionadoPieHabil" (change)="elegirPieHabil($event.target.value)">
+      <option [value]="item" *ngFor="let item of listaPieHabil">
+        {{item}}
+      </option>
+      </select>
+    </p>
+  </div>
 </div>
 <div id="jugadores">
   <ul class="jugadores">
