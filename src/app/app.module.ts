@@ -8,6 +8,10 @@ import { ProductoModule } from '@producto/producto.module';
 import { CoreModule } from '@core/core.module';
 import { CookieService } from 'ngx-cookie-service';
 import { JugadorModule } from './feature/jugador/jugador.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -22,7 +26,11 @@ import { JugadorModule } from './feature/jugador/jugador.module';
     AppRoutingModule,
     ProductoModule,
     CoreModule,
-    JugadorModule
+    JugadorModule,
+    BrowserAnimationsModule,
+    MatTableModule, 
+    MatSortModule,
+    MatExpansionModule
   ],
   providers: [CookieService],
     bootstrap: [AppComponent],

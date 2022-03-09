@@ -15,11 +15,11 @@ export class JugadorService {
     return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
   }
 
-  public equipoAleatorio(){
+  public equipoAleatorio(defensas: string, mediocampistas: string, delanteros: string){
     const envioDtoPosiciones = new HttpParams()
-                .set('defensas', '4')
-                .set('mediocampistas', '4')
-                .set('delanteros', '2');
+                .set('defensas', defensas)
+                .set('mediocampistas', mediocampistas)
+                .set('delanteros', delanteros);
     return this.http.doGetParameters<Jugador[]>(`${this.url}/equipo`, envioDtoPosiciones);
   }
 

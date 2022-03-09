@@ -12,7 +12,12 @@ const LONGITUD_MAXIMA_PERMITIDA_TEXTO = 20;
   styleUrls: ['./crear-jugador.component.css']
 })
 export class CrearJugadorComponent implements OnInit {
+
   jugadorForm: FormGroup;
+  seleccionadoPosicion: string;
+  seleccionadoPieHabil: string;
+  listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
+  listaPieHabil:string[]=["Derecho", "Izquierdo"];
 
   constructor(protected jugadorService: JugadorService) { }
 

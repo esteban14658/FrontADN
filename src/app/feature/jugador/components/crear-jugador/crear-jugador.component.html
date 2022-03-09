@@ -1,78 +1,60 @@
 <p>crear-jugador works!</p>
 <form [formGroup]="jugadorForm" (ngSubmit)="crear()">
-    <div class="row">
-      <div class="col-sm-2">
-        <label>Documento:</label>
-      </div>
-      <div class="col-sm-4">
-        <input validar type="text" id="documentoJugador" name="documento" placeholder="Documento jugador"
-          class="form-control" formControlName="documento">
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-          <label>Nombre:</label>
-        </div>
-        <div class="col-sm-4">
-          <input validar type="text" id="nombreJugador" name="nombre" placeholder="Nombre jugador"
-            class="form-control" formControlName="nombre">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            <label>Apellido:</label>
-        </div>
-        <div class="col-sm-4">
-            <input validar type="text" id="apellidoJugador" name="apellido" placeholder="Apellido jugador"
-            class="form-control" formControlName="apellido">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-          <label>Fecha de nacimiento:</label>
-        </div>
-        <div class="col-sm-4">
-          <input validar type="date" id="fechaNacimientoJugador" name="fechaNacimiento" placeholder="fecha de nacimiento jugador"
-            class="form-control" formControlName="fechaNacimiento">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-          <label>Peso:</label>
-        </div>
-        <div class="col-sm-4">
-          <input validar type="text" id="pesoJugador" name="peso" placeholder="Peso jugador"
-            class="form-control" formControlName="peso">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-          <label>Altura:</label>
-        </div>
-        <div class="col-sm-4">
-          <input validar type="text" id="alturaJugador" name="altura" placeholder="Altura jugador"
-            class="form-control" formControlName="altura">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-          <label>Posicion:</label>
-        </div>
-        <div class="col-sm-4">
-          <input validar type="text" id="posicionJugador" name="posicion" placeholder="Posicion jugador"
-            class="form-control" formControlName="posicion">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-          <label>Pie habil:</label>
-        </div>
-        <div class="col-sm-4">
-          <input validar type="text" id="pieHabilJugador" name="pieHabil" placeholder="Pie habil jugador"
-            class="form-control" formControlName="pieHabil">
-        </div>
-    </div>
-    <button type="submit" [disabled]="jugadorForm.invalid">
-        <span>Guardar</span>
-    </button>
+
+  <mat-form-field >
+    <input validar matInput placeholder="10101010"  formControlName="documento" maxlength="20" class="form-control">
+  </mat-form-field>
+  <br>
+  
+  <mat-form-field >
+    <input validar matInput placeholder="Juanito"  formControlName="nombre" maxlength="20" class="form-control">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field >
+    <input validar matInput placeholder="Perez"  formControlName="apellido" maxlength="20" class="form-control">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field >
+    <input validar matInput type="date" formControlName="fechaNacimiento" maxlength="20" class="form-control">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field >
+    <input validar matInput type="text" placeholder="50.7"  formControlName="peso" maxlength="20" class="form-control">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field >
+    <input validar matInput type="text" placeholder="1.87"  formControlName="altura" maxlength="20" class="form-control" >
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Posiciones</mat-label>
+    <mat-select [(ngModel)]="seleccionadoPosicion"
+    formControlName="posicion">
+      <mat-option *ngFor="let item of listaPosiciones " [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field>
+    <mat-label>Posiciones</mat-label>
+    <mat-select [(ngModel)]="seleccionadoPieHabil"
+    formControlName="pieHabil">
+      <mat-option *ngFor="let item of listaPieHabil " [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+
+  <button mat-raised-button color="primary" type="submit" >
+    <mat-icon>done</mat-icon>
+    <span>Guardar</span>
+  </button>
 </form>

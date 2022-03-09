@@ -1,40 +1,102 @@
-<p>listar-jugador works!</p>
-<div id="elementos">
-  <p>
-    <select name="miselect" [(ngModel)]="seleccionado" (change)="elegirTipoDeLista($event.target.value)">
-    <option [value]="item" *ngFor="let item of listaGeneral">
-      {{item}}
-    </option>
-    </select>
-  </p>
-</div>
-<div *ngIf="mostrarDatosPosicion">
-  <div id="elementosPosicion">
-    <p>
-      <select name="miselect" [(ngModel)]="seleccionadoPosicion" (change)="elegirPosicion($event.target.value)">
-      <option [value]="item" *ngFor="let item of listaPosiciones">
-        {{item}}
-      </option>
-      </select>
-    </p>
+<mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Elige la alineación para tu equipo
+    </mat-panel-title>
+    <mat-panel-description>
+      Entrada de datos (Ejem: 4 - 4 - 2)
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div class="contenedor">
+    <mat-form-field>
+      <input matInput [(ngModel)]="valor1" type="number" placeholder="Ingrese la cantidad de defensas" min="3" max={{cantidadEquipo}} 
+      (change)="restar(1)">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="valor2" type="number" placeholder="Ingrese la cantidad de mediocampistas" min="2" max={{cantidadEquipo}}
+      (change)="restar(2)">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="valor3" type="number" placeholder="Ingrese la cantidad de delanteros" min="1" max={{cantidadEquipo}}
+      (change)="restar(3)">
+    </mat-form-field>
   </div>
+</mat-expansion-panel>
+
+<mat-form-field>
+  <mat-label>Tipo de lista</mat-label>
+  <mat-select [(ngModel)]="seleccionado" (selectionChange)="elegirTipoDeLista($event.value)">
+    <mat-option *ngFor="let item of listaGeneral " [value]="item">
+      {{item}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="mostrarDatosPosicion">
+  <mat-form-field>
+    <mat-label>Posiciones</mat-label>
+    <mat-select [(ngModel)]="seleccionadoPosicion" (selectionChange)="elegirPosicion($event.value)">
+      <mat-option *ngFor="let item of listaPosiciones " [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div *ngIf="mostrarDatosPieHabil">
-  <div id="elementosPosicion">
-    <p>
-      <select name="miselect" [(ngModel)]="seleccionadoPieHabil" (change)="elegirPieHabil($event.target.value)">
-      <option [value]="item" *ngFor="let item of listaPieHabil">
+  <mat-form-field>
+    <mat-label>Pie habil</mat-label>
+    <mat-select [(ngModel)]="seleccionadoPieHabil" (selectionChange)="elegirPieHabil($event.value)">
+      <mat-option *ngFor="let item of listaPieHabil " [value]="item">
         {{item}}
-      </option>
-      </select>
-    </p>
-  </div>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
-<div id="jugadores">
-  <ul class="jugadores">
-    <li *ngFor="let item of listaJugadores | async">
-      <span>{{item.id}}</span> {{item.nombre}} {{item.apellido}} {{item.altura}} {{item.peso}} {{item.posicion}}
-      {{item.fechaNacimiento}}
-    </li>
-  </ul>
-</div>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="documento">
+    <th mat-header-cell *matHeaderCellDef> Documento </th>
+    <td mat-cell *matCellDef="let element"> {{element.documento}} </td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="apellido">
+    <th mat-header-cell *matHeaderCellDef> Apellido </th>
+    <td mat-cell *matCellDef="let element"> {{element.apellido}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fechaNacimiento">
+    <th mat-header-cell *matHeaderCellDef> Fecha de nacimiento </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaNacimiento}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="peso">
+    <th mat-header-cell *matHeaderCellDef> Peso </th>
+    <td mat-cell *matCellDef="let element"> {{element.peso}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="altura">
+    <th mat-header-cell *matHeaderCellDef> Altura </th>
+    <td mat-cell *matCellDef="let element"> {{element.altura}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="posicion">
+    <th mat-header-cell *matHeaderCellDef> Posicion </th>
+    <td mat-cell *matCellDef="let element"> {{element.posicion}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
