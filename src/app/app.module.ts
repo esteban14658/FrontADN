@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FacturaModule } from './feature/factura/factura.module';
 
 
 
@@ -27,6 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ProductoModule,
     CoreModule,
     JugadorModule,
+    FacturaModule,
     BrowserAnimationsModule,
     MatTableModule, 
     MatSortModule,

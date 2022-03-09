@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
 import { Jugador } from '../model/jugador';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class JugadorService {
 
   private url : string = `${environment.endpoint}/jugadores`;
 
-  constructor(protected http: HttpService, protected httpClient: HttpClient) { }
+  constructor(protected http: HttpService) { }
 
   public consultar(){
     return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
