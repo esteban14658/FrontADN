@@ -15,6 +15,10 @@ export class JugadorService {
     return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
   }
 
+  public listarJugadoresSinFactura(){
+    return this.http.doGet<Jugador[]>(`${this.url}/factura`, this.http.optsName('consultar jugadores sin factura'));
+  }
+
   public equipoAleatorio(defensas: string, mediocampistas: string, delanteros: string){
     const envioDtoPosiciones = new HttpParams()
                 .set('defensas', defensas)
@@ -37,12 +41,12 @@ export class JugadorService {
 
   public guardar(jugador: Jugador) {
     return this.http.doPost<Jugador, boolean>(`${this.url}`, jugador,
-                                                this.http.optsName('crear/actualizar productos'));
+                                                this.http.optsName('crear/actualizar jugadores'));
   }
 
   public eliminar(id: number) {
     return this.http.doDelete<boolean>(`${this.url}/${id}`,
-                                                 this.http.optsName('eliminar productos'));
+                                                 this.http.optsName('eliminar jugadores'));
   }
 
 }

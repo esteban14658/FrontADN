@@ -15,4 +15,9 @@ export class FacturaService {
   public consultar(){
     return this.http.doGet<Factura[]>(`${this.url}`, this.http.optsName('consultar facturas'));
   }
+
+  public guardar(factura: Factura) {
+    return this.http.doPost<Factura, boolean>(`${this.url}`, factura,
+                                                this.http.optsName('crear/actualizar facturas'));
+  }
 }

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.service';
+import { Factura } from '../../shared/model/factura';
+import { FacturaService } from '../../shared/service/factura.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-crear-factura',
@@ -7,9 +14,85 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrearFacturaComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected facturaService: FacturaService, 
+              protected jugadorService: JugadorService) { }
 
-  ngOnInit(): void {
+  public listaJugadores: Observable<Jugador[]>;
+
+  displayedJugadores: Jugador[];
+
+  meses: number[] = [1, 3, 6];
+
+  facturaForm: FormGroup;
+  seleccionado: Jugador;
+  seleccionMeses: number;
+
+  myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
+  ngOnInit(){
+    this.jugadorService.listarJugadoresSinFactura().subscribe(data => {
+      this.displayedJugadores = data;
+    });
+    this.listaJugadores = this.jugadorService.listarJugadoresSinFactura();
+    this.construirFormulario();
+  }
+
+  crear(){
+    let factura = new Factura(
+      0,
+      0,
+      this.myDate,
+      this.myDate,
+      this.seleccionado,
+      1,
+      this.facturaForm.value['descripcion'],
+      this.facturaForm.value['meses']
+    )
+    this.facturaService.guardar(factura).subscribe(() => {
+      this.facturaForm.reset();
+    });
+  }
+
+  construirFormulario(){
+    this.facturaForm = new FormGroup({
+      id: new FormControl('', [Validators.required]),
+      valor: new FormControl('', [Validators.min(0), Validators.max(1000000)]),
+      fechaIngreso: new FormControl('', [Validators.required]),
+      fechaCaducidad: new FormControl('', [Validators.required]),
+      jugador: new FormControl('', [Validators.required]),
+      estado: new FormControl('', [Validators.min(0), Validators.max(1)]),
+      descripcion: new FormControl('', [Validators.required]),
+      meses: new FormControl('', [Validators.required, Validators.min(1),
+                                  Validators.max(6)])
+    });
+  }
+
+  get id(){
+    return this.facturaForm.get('id');
+  }
+
+  get valor(){
+    return this.facturaForm.get('valor');
+  }
+
+  get fechaIngreso(){
+    return this.facturaForm.get('fechaIngreso');
+  }
+
+  get fechaCaducidad(){
+    return this.facturaForm.get('fechaCaducidad');
+  }
+
+  get jugador(){
+    return this.facturaForm.get('jugador');
+  }
+
+  get estado(){
+    return this.facturaForm.get('estado');
+  }
+
+  get descripcion(){
+    return this.facturaForm.get('descripcion');
   }
 
 }

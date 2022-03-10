@@ -3,14 +3,15 @@ import { Jugador } from "src/app/feature/jugador/shared/model/jugador";
 export class Factura{
     id: number;
     valor: number;
-    fechaIngreso: Date;
-    fechaCaducidad: Date;
+    fechaIngreso: string;
+    fechaCaducidad: string;
     jugador: Jugador;
     estado: number;
     descripcion: string;
+    meses: number;
 
-    constructor(id: number, valor: number, fechaIngreso: Date, fechaCaducidad: Date, 
-        jugador: Jugador, estado: number, descripcion: string){
+    constructor(id: number, valor: number, fechaIngreso: string, fechaCaducidad: string, 
+        jugador: Jugador, estado: number, descripcion: string, meses: number){
         this.id = id;
         this.valor = valor;
         this.fechaIngreso = fechaIngreso;
@@ -18,5 +19,6 @@ export class Factura{
         this.jugador = jugador;
         this.estado = estado;
         this.descripcion = descripcion;
+        this.meses = meses;
     }
 }
