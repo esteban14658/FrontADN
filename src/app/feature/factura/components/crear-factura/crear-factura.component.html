@@ -1,6 +1,6 @@
 <p>crear-factura works!</p>
 
-<form [formGroup]="facturaForm" (ngSubmit)="crear()">
+<form [formGroup]="facturaForm"  (ngSubmit)="crear()">
     <mat-form-field>
         <mat-label>Jugadores sin mensualidad activa</mat-label>
         <mat-select [(ngModel)]="seleccionado" formControlName="jugador">
@@ -25,7 +25,7 @@
     </mat-form-field>
     <br>
   
-    <button mat-raised-button color="primary" type="submit" >
+    <button mat-raised-button color="primary" type="submit">
       <mat-icon>done</mat-icon>
       <span>Guardar</span>
     </button>

@@ -6,6 +6,7 @@ import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.s
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-factura',
@@ -15,7 +16,8 @@ import { formatDate } from '@angular/common';
 export class CrearFacturaComponent implements OnInit {
 
   constructor(protected facturaService: FacturaService, 
-              protected jugadorService: JugadorService) { }
+              protected jugadorService: JugadorService,
+              private router: Router) { }
 
   public listaJugadores: Observable<Jugador[]>;
 
@@ -50,6 +52,7 @@ export class CrearFacturaComponent implements OnInit {
     )
     this.facturaService.guardar(factura).subscribe(() => {
       this.facturaForm.reset();
+      this.router.navigateByUrl('/home', { replaceUrl: true });
     });
   }
 

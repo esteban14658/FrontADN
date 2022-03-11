@@ -4,7 +4,9 @@ import { Jugador } from '../model/jugador';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class JugadorService {
 
   private url : string = `${environment.endpoint}/jugadores`;
@@ -17,6 +19,10 @@ export class JugadorService {
 
   public listarJugadoresSinFactura(){
     return this.http.doGet<Jugador[]>(`${this.url}/factura`, this.http.optsName('consultar jugadores sin factura'));
+  }
+
+  public listarJugadoresSinAsistencia(){
+    return this.http.doGet<Jugador[]>(`${this.url}/asistencia`, this.http.optsName('consultar jugadores sin asistencia'));
   }
 
   public equipoAleatorio(defensas: string, mediocampistas: string, delanteros: string){

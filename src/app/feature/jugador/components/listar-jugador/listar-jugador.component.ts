@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Jugador } from '../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
@@ -12,7 +14,7 @@ import { JugadorService } from '../../shared/service/jugador.service';
 })
 export class ListarJugadorComponent implements OnInit {
   displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaNacimiento', 
-                                'peso', 'altura', 'posicion'];
+                                'peso', 'altura', 'posicion', 'acciones'];
   dataSource = new MatTableDataSource<Jugador>()
 
   panelOpenState = false;
@@ -34,7 +36,9 @@ export class ListarJugadorComponent implements OnInit {
 
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
-  constructor(protected jugadorService: JugadorService) { }
+  constructor(protected jugadorService: JugadorService, 
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
@@ -99,8 +103,18 @@ export class ListarJugadorComponent implements OnInit {
     }
   }
 
-  alineacion(){
+  eliminar(id: number){
+    console.log(id);
+    this.jugadorService.eliminar(id).subscribe(() => {
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.openSnackBar();
+    });
+  }
 
+  openSnackBar() {
+    this.snackBar.open('Jugador eliminado correctamente', 'Success', {
+      duration: 2000
+    });
   }
 
 }

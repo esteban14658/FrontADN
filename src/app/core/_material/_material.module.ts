@@ -17,6 +17,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDialogModule,
     MatCardModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule, 
+    MatCheckboxModule
   ],
   exports: [
     MatToolbarModule,
@@ -54,7 +56,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatDialogModule,
     MatCardModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule, 
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

@@ -3,13 +3,14 @@ export class Jugador{
     documento: number;
     nombre: string;
     apellido: string;
-    fechaNacimiento: Date;
+    fechaNacimiento: string;
     peso: number;
     altura: number;
     posicion: string;
     pieHabil: string;
+    seleccionado: boolean;
 
-    constructor(id: number, documento: number, nombre: string, apellido: string, fechaNacimiento: Date, 
+    constructor(id: number, documento: number, nombre: string, apellido: string, fechaNacimiento: string, 
         peso: number, altura: number, posicion: string, pieHabil: string){
         this.id = id;
         this.documento = documento;

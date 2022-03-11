@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BorrarJugadorComponent } from './components/borrar-jugador/borrar-jugador.component';
 import { CrearJugadorComponent } from './components/crear-jugador/crear-jugador.component';
 import { JugadorComponent } from './components/jugador/jugador.component';
 import { ListarJugadorComponent } from './components/listar-jugador/listar-jugador.component';
@@ -17,10 +16,6 @@ const routes: Routes = [
       {
         path: 'listar',
         component: ListarJugadorComponent
-      },
-      {
-        path: 'borrar',
-        component: BorrarJugadorComponent
       }
     ]
   }

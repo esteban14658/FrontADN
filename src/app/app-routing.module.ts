@@ -7,9 +7,9 @@ import { HomeComponent } from '@home/home.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [SecurityGuard]  },
-  { path: 'producto', loadChildren: () => import('@producto/producto.module').then(mod => mod.ProductoModule) },
   { path: 'jugador', loadChildren: () => import('./feature/jugador/jugador.module').then(mod => mod.JugadorModule) }, 
-  { path: 'factura', loadChildren: () => import('./feature/factura/factura.module').then(mod => mod.FacturaModule)}
+  { path: 'factura', loadChildren: () => import('./feature/factura/factura.module').then(mod => mod.FacturaModule)},
+  { path: 'asistencia', loadChildren: () => import('./feature/asistencia/asistencia.module').then(mod => mod.AsistenciaModule)}
   
 ];
 

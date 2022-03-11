@@ -20,4 +20,9 @@ export class FacturaService {
     return this.http.doPost<Factura, boolean>(`${this.url}`, factura,
                                                 this.http.optsName('crear/actualizar facturas'));
   }
+
+  public eliminar(id: number) {
+    return this.http.doDelete<boolean>(`${this.url}/${id}`,
+                                                 this.http.optsName('eliminar facturas'));
+  }
 }
