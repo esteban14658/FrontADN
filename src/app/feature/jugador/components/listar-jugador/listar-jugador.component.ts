@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Jugador } from '../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 import { BorrarJugadorComponent } from '../borrar-jugador/borrar-jugador.component';
@@ -16,13 +15,14 @@ const cantidadDeJugadores = 10;
   styleUrls: ['./listar-jugador.component.css']
 })
 export class ListarJugadorComponent implements OnInit {
+  public listaJugadores: Jugador[];
   displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaNacimiento', 
                                 'peso', 'altura', 'posicion', 'acciones'];
   dataSource = new MatTableDataSource<Jugador>()
 
   panelOpenState = false;
 
-  public listaJugadores: Observable<Jugador[]>;
+
   listaGeneral:string[]=["Listar todos", "Equipo aleatorio", "Listar por posicion", "Listar por pie habil", 
                           "Listar por categoria"];
   listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
@@ -52,7 +52,9 @@ export class ListarJugadorComponent implements OnInit {
 
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
-    console.log(this.seleccionado);
+    this.jugadorService.consultar().subscribe(data => {
+      this.listaJugadores = data;
+    });
     this.lista = this.listaDeAnios();
    }
 
@@ -90,8 +92,6 @@ export class ListarJugadorComponent implements OnInit {
       this.mostrarDatosPosicion = false;
       this.mostrarDatosCategoria = true;
       return this.elegirCategoria(this.seleccionadoCategoria);
-    } else {
-      console.log("No permitido");
     }
   }
 
@@ -140,7 +140,7 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   openSnackBar() {
-    this.snackBar.open('Jugador eliminado correctamente', 'Success', {
+    return this.snackBar.open('Jugador eliminado correctamente', 'Success', {
       duration: 2000
     });
   }

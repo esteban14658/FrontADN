@@ -4,9 +4,7 @@ import { Jugador } from '../model/jugador';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class JugadorService {
 
   private url : string = `${environment.apiUrl}/jugadores`;
