@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
+import { BorrarFacturaComponent } from '../borrar-factura/borrar-factura.component';
 
 @Component({
   selector: 'app-listar-factura',
@@ -21,7 +24,9 @@ export class ListarFacturaComponent implements OnInit {
   dataSource = new MatTableDataSource<Factura>()
 
   constructor(protected facturaService: FacturaService, 
-              protected router: Router) { }
+              protected router: Router, 
+              private snackBar: MatSnackBar,
+              public dialogo: MatDialog) { }
 
   ngOnInit(){
     this.listaFacturas = this.facturaService.consultar();
@@ -40,7 +45,31 @@ export class ListarFacturaComponent implements OnInit {
     console.log(id);
     this.facturaService.eliminar(id).subscribe(() => {
       this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.openSnackBar();
     });
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Factura eliminada correctamente', 'Success', {
+      duration: 2000
+    });
+  }
+
+  mostrarDialogo(id: number): void {
+    console.log(id);
+    this.dialogo
+      .open(BorrarFacturaComponent, {
+        data: `¿Deseas eliminar la factura?`
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+          this.eliminar(id);
+          alert("¡Si!");
+        } else {
+          alert("Cancelar");
+        }
+      });
   }
 
 }

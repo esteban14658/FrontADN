@@ -5,13 +5,15 @@ import { ListarFacturaComponent } from './components/listar-factura/listar-factu
 import { CrearFacturaComponent } from './components/crear-factura/crear-factura.component';
 import { FacturaComponent } from './components/factura/factura.component';
 import { SharedModule } from '@shared/shared.module';
+import { BorrarFacturaComponent } from './components/borrar-factura/borrar-factura.component';
 
 
 @NgModule({
   declarations: [
     ListarFacturaComponent,
     CrearFacturaComponent,
-    FacturaComponent
+    FacturaComponent,
+    BorrarFacturaComponent
   ],
   imports: [
     SharedModule,

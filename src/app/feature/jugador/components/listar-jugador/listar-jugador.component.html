@@ -9,15 +9,15 @@
   </mat-expansion-panel-header>
   <div class="contenedor">
     <mat-form-field>
-      <input matInput [(ngModel)]="valor1" type="number" placeholder="Ingrese la cantidad de defensas" min="3" max={{cantidadEquipo}} 
+      <input matInput [(ngModel)]="defensas" type="number" placeholder="Ingrese la cantidad de defensas" min="3" max={{cantidadEquipo}} 
       (change)="restar(1)">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="valor2" type="number" placeholder="Ingrese la cantidad de mediocampistas" min="2" max={{cantidadEquipo}}
+      <input matInput [(ngModel)]="mediocampistas" type="number" placeholder="Ingrese la cantidad de mediocampistas" min="2" max={{cantidadEquipo}}
       (change)="restar(2)">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="valor3" type="number" placeholder="Ingrese la cantidad de delanteros" min="1" max={{cantidadEquipo}}
+      <input matInput [(ngModel)]="delanteros" type="number" placeholder="Ingrese la cantidad de delanteros" min="1" max={{cantidadEquipo}}
       (change)="restar(3)">
     </mat-form-field>
   </div>
@@ -47,6 +47,16 @@
     <mat-label>Pie habil</mat-label>
     <mat-select [(ngModel)]="seleccionadoPieHabil" (selectionChange)="elegirPieHabil($event.value)">
       <mat-option *ngFor="let item of listaPieHabil " [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div *ngIf="mostrarDatosCategoria">
+  <mat-form-field>
+    <mat-label>Categorias</mat-label>
+    <mat-select [(ngModel)]="seleccionadoCategoria" (selectionChange)="elegirCategoria($event.value)">
+      <mat-option *ngFor="let item of lista " [value]="item">
         {{item}}
       </mat-option>
     </mat-select>
@@ -102,7 +112,7 @@
         <!--button mat-button color="primary" [routerLink]="['/medicos/edicion/', element.id]" >
             <mat-icon>edit</mat-icon>
         </button-->
-        <button mat-button color="primary" (click)="eliminar(element.id)">
+        <button mat-button color="primary" (click)="mostrarDialogo(element.id)">
             <mat-icon>clear</mat-icon>
         </button>
     </mat-cell>

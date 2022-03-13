@@ -32,21 +32,24 @@ export class CrearFacturaComponent implements OnInit {
   myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
   ngOnInit(){
-    this.jugadorService.listarJugadoresSinFactura().subscribe(data => {
+    this.facturaService.listarJugadoresSinFactura().subscribe(data => {
       this.displayedJugadores = data;
     });
-    this.listaJugadores = this.jugadorService.listarJugadoresSinFactura();
+    this.listaJugadores = this.facturaService.listarJugadoresSinFactura();
     this.construirFormulario();
   }
 
   crear(){
+    const idGenerico = 0;
+    const valor = 100000;
+    const estado = 1;
     let factura = new Factura(
-      0,
-      0,
+      idGenerico,
+      valor,
       this.myDate,
       this.myDate,
       this.seleccionado,
-      1,
+      estado,
       this.facturaForm.value['descripcion'],
       this.facturaForm.value['meses']
     )

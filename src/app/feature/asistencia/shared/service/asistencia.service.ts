@@ -8,7 +8,7 @@ import { Asistencia } from '../model/asistencia';
 })
 export class AsistenciaService {
 
-  private url : string = `${environment.endpoint}/asistencias`;
+  private url : string = `${environment.apiUrl}/asistencias`;
 
   constructor(protected http: HttpService) { }
 

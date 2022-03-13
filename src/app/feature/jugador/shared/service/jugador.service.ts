@@ -9,16 +9,12 @@ import { HttpParams } from '@angular/common/http';
 })
 export class JugadorService {
 
-  private url : string = `${environment.endpoint}/jugadores`;
+  private url : string = `${environment.apiUrl}/jugadores`;
 
   constructor(protected http: HttpService) { }
 
   public consultar(){
     return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
-  }
-
-  public listarJugadoresSinFactura(){
-    return this.http.doGet<Jugador[]>(`${this.url}/factura`, this.http.optsName('consultar jugadores sin factura'));
   }
 
   public listarJugadoresSinAsistencia(){
@@ -43,6 +39,10 @@ export class JugadorService {
 
   public listarPorPieHabil(pieHabil: string){
     return this.http.doGet<Jugador[]>(`${this.url}/jugadores/${pieHabil}`);
+  }
+
+  public listarPorCategoria(fecha: string){
+    return this.http.doGet<Jugador[]>(`${this.url}/categoria/${fecha}`);
   }
 
   public guardar(jugador: Jugador) {
