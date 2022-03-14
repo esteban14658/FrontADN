@@ -1,6 +1,6 @@
 import { browser, ExpectedConditions } from "protractor";
 import { AppPage } from "../app.po";
-import { BorrarJugadorDialogPage } from "../page/jugador/borrar-jugador.po";
+//import { BorrarJugadorDialogPage } from "../page/jugador/borrar-jugador.po";
 import { JugadorPage } from "../page/jugador/jugador.po";
 import { ListarJugadoresPage } from "../page/jugador/listar-jugadores.po";
 import { NavbarPage } from "../page/navbar/navbar.po";
@@ -10,14 +10,14 @@ describe('workspace-project Jugador', () => {
     let navBar: NavbarPage;
     let jugador: JugadorPage;
     let listaJugadores: ListarJugadoresPage;
-    let borrarJugador: BorrarJugadorDialogPage;
+    //let borrarJugador: BorrarJugadorDialogPage;
 
     beforeEach(() => {
         page = new AppPage();
         navBar = new NavbarPage();
         jugador = new JugadorPage();
         listaJugadores = new ListarJugadoresPage();
-        borrarJugador = new BorrarJugadorDialogPage();
+       // borrarJugador = new BorrarJugadorDialogPage();
     });
 
     it('Deberia crear jugador', () => {
