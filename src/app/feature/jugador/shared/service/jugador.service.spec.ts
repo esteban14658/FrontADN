@@ -109,6 +109,21 @@ describe('JugadorService', () => {
     req.flush(dummyJugadores);
   });
 
+  it('deberia listar jugadores sin asistencias', () => {
+    const dummyJugadores = [
+      new Jugador(2, 1010102, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho'),
+      new Jugador(3, 1010103, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Defensa', 'Derecho'), 
+      new Jugador(4, 1010104, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho')
+    ];
+    service.listarJugadoresSinAsistencia().subscribe(respuesta => {
+      expect(respuesta.length).toBe(3);
+      expect(respuesta).toEqual(dummyJugadores);
+    });
+    const req = httpMock.expectOne(`${apiEndpointJugadores}/asistencia`);
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyJugadores);
+});
+
   it('deberia obtener un jugador', () => {
     let jugador = new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Delantero', 'Derecho');
     service.obtenerPorDocumento(jugador.documento).subscribe((jugadores) => {

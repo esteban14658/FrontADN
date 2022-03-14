@@ -5,7 +5,6 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
 import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.service';
 import { Asistencia } from '../../shared/model/asistencia';
@@ -20,7 +19,7 @@ export class CrearAsistenciaComponent implements OnInit {
 
   @Output() addRequest = new EventEmitter<Jugador>();
 
-  listaJugadores: Observable<Jugador[]>;
+  listaJugadores: Jugador[];
   listaDeId: number[] = [];
 
   myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
@@ -39,7 +38,6 @@ export class CrearAsistenciaComponent implements OnInit {
 
   ngOnInit(){
     this.listarJugadores();
-    this.listaJugadores = this.jugadorService.consultar();
   }
 
   isAllSelected() {
@@ -55,9 +53,10 @@ export class CrearAsistenciaComponent implements OnInit {
   }
 
   listarJugadores(){
-    this.jugadorService.listarJugadoresSinAsistencia().subscribe(data => {
+    return this.jugadorService.listarJugadoresSinAsistencia().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+      this.listaJugadores = data;
     });
   }
 
@@ -78,9 +77,7 @@ export class CrearAsistenciaComponent implements OnInit {
       this.listaDeId.forEach((element,index)=>{
         if(element==id) this.listaDeId.splice(index,1);
       });
-    }
-    console.log(this.listaDeId);
-    
+    }    
   }
 
   showsOptions(event:MatCheckboxChange): void {
@@ -94,7 +91,6 @@ export class CrearAsistenciaComponent implements OnInit {
     } else {
       this.listaDeId = [];
     }
-    console.log(this.listaDeId);
   }
 
 }
