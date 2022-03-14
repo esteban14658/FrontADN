@@ -40,7 +40,6 @@ export class CrearJugadorComponent implements OnInit {
     this.jugadorService.guardar(jugador).subscribe(() => {
       this.jugadorForm.reset();
     });
-    console.log(this.jugadorForm.value);
   }
 
   private construirFormularioProducto() {

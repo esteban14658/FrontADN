@@ -70,7 +70,6 @@ export class CrearAsistenciaComponent implements OnInit {
   }
 
   showOptions(event:MatCheckboxChange, id: number) {
-    console.log(id);
     if (event.checked === true){
       this.listaDeId.push(id);
     } else {
@@ -81,7 +80,6 @@ export class CrearAsistenciaComponent implements OnInit {
   }
 
   showsOptions(event:MatCheckboxChange): void {
-    console.log(event.checked);
     this.listaDeId = [];
     this.masterToggle();
     if (event.checked === true){

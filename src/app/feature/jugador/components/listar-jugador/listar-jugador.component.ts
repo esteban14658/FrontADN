@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MensajeService } from '@core/services/mensaje.service';
 import { Jugador } from '../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 import { BorrarJugadorComponent } from '../borrar-jugador/borrar-jugador.component';
@@ -47,19 +47,18 @@ export class ListarJugadorComponent implements OnInit {
 
   constructor(protected jugadorService: JugadorService, 
               private router: Router,
-              private snackBar: MatSnackBar, 
-              public dialogo: MatDialog) { }
+              public dialogo: MatDialog, 
+              protected mensajeService: MensajeService) { }
 
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
     this.jugadorService.consultar().subscribe(data => {
       this.listaJugadores = data;
     });
-    this.lista = this.listaDeAnios();
+    this.lista = this.jugadorService.listaDeAnios();
    }
 
   elegirTipoDeLista(bandera: string){
-    console.log(this.seleccionado);
     if (bandera === "Listar todos"){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
@@ -135,13 +134,7 @@ export class ListarJugadorComponent implements OnInit {
     console.log(id);
     this.jugadorService.eliminar(id).subscribe(() => {
       this.router.navigateByUrl('/home', { replaceUrl: true });
-      this.openSnackBar();
-    });
-  }
-
-  openSnackBar() {
-    return this.snackBar.open('Jugador eliminado correctamente', 'Success', {
-      duration: 2000
+      this.mensajeService.openSnackBar('Jugador eliminado corretamente', 'Success');
     });
   }
 
@@ -159,17 +152,6 @@ export class ListarJugadorComponent implements OnInit {
           alert("Cancelar");
         }
       });
-  }
-
-  listaDeAnios(){
-    var array = new Array();
-    var j = 0;
-    for (var i = 2010; i < 2030; i++){
-      array[j] = i.toString();
-      j++;
-    }
-    console.log(array);
-    return array;
   }
 
 }

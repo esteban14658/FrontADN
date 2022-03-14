@@ -7,6 +7,7 @@ import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import { MensajeService } from '@core/services/mensaje.service';
 
 @Component({
   selector: 'app-crear-factura',
@@ -17,6 +18,7 @@ export class CrearFacturaComponent implements OnInit {
 
   constructor(protected facturaService: FacturaService, 
               protected jugadorService: JugadorService,
+              protected mensajeService: MensajeService,
               private router: Router) { }
 
   public listaJugadores: Observable<Jugador[]>;
@@ -40,21 +42,25 @@ export class CrearFacturaComponent implements OnInit {
   }
 
   crear(){
-    const idGenerico = 0;
-    const valor = 100000;
-    const estado = 1;
     let factura = new Factura(
-      idGenerico,
-      valor,
-      this.myDate,
-      this.myDate,
-      this.seleccionado,
-      estado,
+      this.facturaForm.value['id'],
+      this.facturaForm.value['valor'],
+      this.facturaForm.value['fechaIngreso'],
+      this.facturaForm.value['fechaCaducidad'],
+      this.facturaForm.value['jugador'],
+      this.facturaForm.value['estado'],
       this.facturaForm.value['descripcion'],
       this.facturaForm.value['meses']
-    )
+    );
+    factura.id = 1;
+    factura.valor = 100000;
+    factura.fechaIngreso = '2022-04-25';
+    factura.fechaCaducidad = '2022-07-25';
+    factura.estado = 1;
+    factura.jugador = this.seleccionado;
     this.facturaService.guardar(factura).subscribe(() => {
       this.facturaForm.reset();
+      this.mensajeService.openSnackBar('Factura creada correctamente', 'Success');
       this.router.navigateByUrl('/home', { replaceUrl: true });
     });
   }

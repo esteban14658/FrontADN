@@ -1,9 +1,9 @@
 <p>crear-factura works!</p>
 
-<form [formGroup]="facturaForm"  (ngSubmit)="crear()">
+<form [formGroup]="facturaForm"  (ngSubmit)="crear()" id="facturaForm">
     <mat-form-field>
         <mat-label>Jugadores sin mensualidad activa</mat-label>
-        <mat-select [(ngModel)]="seleccionado" formControlName="jugador">
+        <mat-select [(ngModel)]="seleccionado" formControlName="jugador" id="jugador">
           <mat-option *ngFor="let item of displayedJugadores " [value]="item">
             {{item.id}} {{item.documento}} {{item.nombre}} {{item.apellido}}
           </mat-option>
@@ -12,7 +12,7 @@
     
     <mat-form-field>
         <mat-label>Meses</mat-label>
-        <mat-select [(ngModel)]="seleccionMeses" formControlName="meses">
+        <mat-select [(ngModel)]="seleccionMeses" formControlName="meses" id="meses">
             <mat-option *ngFor="let item of meses " [value]="item">
             {{item}}
             </mat-option>
@@ -21,11 +21,11 @@
     <br>
 
     <mat-form-field >
-        <input validar matInput type="text" formControlName="descripcion" maxlength="80" class="form-control">
+        <input validar matInput type="text" formControlName="descripcion" maxlength="80" class="form-control" id="descripcion">
     </mat-form-field>
     <br>
   
-    <button mat-raised-button color="primary" type="submit">
+    <button mat-raised-button color="primary" type="submit" id="registrarFactura">
       <mat-icon>done</mat-icon>
       <span>Guardar</span>
     </button>

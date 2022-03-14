@@ -4,7 +4,7 @@ import { Jugador } from '../model/jugador';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class JugadorService {
 
   private url : string = `${environment.apiUrl}/jugadores`;
@@ -51,6 +51,16 @@ export class JugadorService {
   public eliminar(id: number) {
     return this.http.doDelete<boolean>(`${this.url}/${id}`,
                                                  this.http.optsName('eliminar jugadores'));
+  }
+
+  public listaDeAnios(){
+    var array = new Array();
+    var j = 0;
+    for (var i = 2010; i < 2030; i++){
+      array[j] = i.toString();
+      j++;
+    }
+    return array;
   }
 
 }
