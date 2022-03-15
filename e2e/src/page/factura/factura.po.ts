@@ -1,4 +1,4 @@
-import { browser, by, element } from "protractor";
+import { browser, by, element } from 'protractor';
 
 export class FacturaPage{
     private linkCrearFactura = element(by.id('linkCrearFactura'));

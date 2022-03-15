@@ -14,7 +14,6 @@ export class JugadorPage{
     private inputPieHabil = element(by.id('pieHabil'));
     private inputCategoria = element(by.id('categoria'));
     private inputTipoDeLista = element(by.id('tipoDeLista'));
-
     private jugadorForm = element(by.id('jugadorForm'));
     private dialogo = element(by.id('mostrarDialogo'));
     private buttonRegistrarJugador = element(by.id('registrarJugador'));

@@ -1,8 +1,8 @@
-import { browser, ExpectedConditions } from "protractor";
-import { AppPage } from "../app.po";
-import { JugadorPage } from "../page/jugador/jugador.po";
-import { ListarJugadoresPage } from "../page/jugador/listar-jugadores.po";
-import { NavbarPage } from "../page/navbar/navbar.po";
+import { browser, ExpectedConditions } from 'protractor';
+import { AppPage } from '../app.po';
+import { JugadorPage } from '../page/jugador/jugador.po';
+import { ListarJugadoresPage } from '../page/jugador/listar-jugadores.po';
+import { NavbarPage } from '../page/navbar/navbar.po';
 
 describe('workspace-project Jugador', () => {
     let page: AppPage;
@@ -79,27 +79,18 @@ describe('workspace-project Jugador', () => {
 
     it('Deberia eliminar un jugador', () => {
         const LISTAR_TODOS = 'Listar todos';
-
         page.navigateTo();
         navBar.clickBotonJugadores();
         jugador.clickListarJugadores();
-        jugador.ingresarTipoDeLista(LISTAR_TODOS);
-        
+        jugador.ingresarTipoDeLista(LISTAR_TODOS);    
         listaJugadores.obtenerCeldas();
-
         const dialogo = jugador.obtenerDialogo();
         browser.wait(ExpectedConditions.visibilityOf(dialogo), 1000, 
         dialogo.locator());
-
-        /*const confirmar = jugador.obtenerBotonConfirmar();
-        browser.wait(ExpectedConditions.visibilityOf(confirmar), 1000, 
-        confirmar.locator());*/
         const delBtn = jugador.deleteYesButton();
         browser.wait(ExpectedConditions.visibilityOf(delBtn), 1000, 
         delBtn.locator());
         delBtn.click();
-
         browser.switchTo().alert().accept();
-        
     });
 });
