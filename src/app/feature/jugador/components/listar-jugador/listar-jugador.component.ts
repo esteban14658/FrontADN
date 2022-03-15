@@ -96,25 +96,25 @@ export class ListarJugadorComponent implements OnInit {
 
   elegirPosicion(value: string){
     return this.jugadorService.listarPorPosicion(value).subscribe(data => {
+      this.listaJugadores = data;
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
-      this.listaJugadores = data;
     });
   }
 
   elegirPieHabil(value: string){
     return this.jugadorService.listarPorPieHabil(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
       this.listaJugadores = data;
+      this.dataSource.sort = this.sort;
     });
   }
 
   elegirCategoria(value: string){
     return this.jugadorService.listarPorCategoria(value).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.listaJugadores = data;
+      this.dataSource = new MatTableDataSource(data);
     });
   }
 
