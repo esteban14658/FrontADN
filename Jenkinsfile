@@ -48,12 +48,12 @@ pipeline {
            }
         }
 
-        stage('Lint') {
+/*        stage('Lint') {
             steps {
                 sh 'ng lint'
             }
         }
-
+*/
         stage('Static Code Analysis') {
             steps{
                 echo '------------>Análisis de código estático<------------'
