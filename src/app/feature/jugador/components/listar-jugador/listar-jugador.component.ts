@@ -15,14 +15,10 @@ const cantidadDeJugadores = 10;
   styleUrls: ['./listar-jugador.component.css']
 })
 export class ListarJugadorComponent implements OnInit {
-  public listaJugadores: Jugador[];
   displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaNacimiento', 
                                 'peso', 'altura', 'posicion', 'acciones'];
-  dataSource = new MatTableDataSource<Jugador>()
-
+  dataSource = new MatTableDataSource<Jugador>();
   panelOpenState = false;
-
-
   listaGeneral:string[]=["Listar todos", "Equipo aleatorio", "Listar por posicion", "Listar por pie habil", 
                           "Listar por categoria"];
   listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
@@ -41,8 +37,6 @@ export class ListarJugadorComponent implements OnInit {
   delanteros = 2;
   cantidadEquipo = 0;
 
-  anioInicial = 1990;
-
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   constructor(protected jugadorService: JugadorService, 
@@ -52,9 +46,6 @@ export class ListarJugadorComponent implements OnInit {
 
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
-    this.jugadorService.consultar().subscribe(data => {
-      this.listaJugadores = data;
-    });
     this.lista = this.jugadorService.listaDeAnios();
    }
 
