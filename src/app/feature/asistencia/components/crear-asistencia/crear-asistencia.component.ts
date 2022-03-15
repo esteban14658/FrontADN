@@ -61,12 +61,16 @@ export class CrearAsistenciaComponent implements OnInit {
   }
 
   async agregar(){
-    this.listaDeId.forEach(async x => {
-      this.asistencia.jugador.id = x;
-      await this.asistenciaService.guardar(this.asistencia).subscribe(() => {
+    if (this.listaDeId !== null) {
+      this.listaDeId.forEach(async x => {
+        this.asistencia.jugador.id = x;
+        await this.asistenciaService.guardar(this.asistencia).subscribe(() => {
+        });
       });
-    });
-    this.router.navigateByUrl('/home', { replaceUrl: true });
+      this.router.navigateByUrl('/home', { replaceUrl: true });
+    } else {
+      this.router.navigateByUrl('/jugador', { replaceUrl: true });
+    }
   }
 
   showOptions(event:MatCheckboxChange, id: number) {

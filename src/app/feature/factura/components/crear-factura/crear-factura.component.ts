@@ -58,11 +58,15 @@ export class CrearFacturaComponent implements OnInit {
     factura.fechaCaducidad = '2022-07-25';
     factura.estado = 1;
     factura.jugador = this.seleccionado;
-    this.facturaService.guardar(factura).subscribe(() => {
-      this.facturaForm.reset();
-      this.mensajeService.openSnackBar('Factura creada correctamente', 'Success');
+    if (this.seleccionado !== null){
+      this.facturaService.guardar(factura).subscribe(() => {
+        this.facturaForm.reset();
+        this.mensajeService.openSnackBar('Factura creada correctamente', 'Success');
+        this.router.navigateByUrl('/home', { replaceUrl: true });
+      });
+    } else {
       this.router.navigateByUrl('/home', { replaceUrl: true });
-    });
+    }
   }
 
   construirFormulario(){

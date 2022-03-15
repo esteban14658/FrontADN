@@ -95,7 +95,6 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   elegirPosicion(value: any){
-    this.seleccionadoPosicion = value;
     return this.jugadorService.listarPorPosicion(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
@@ -103,7 +102,6 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   elegirPieHabil(value: any){
-    this.seleccionadoPieHabil = value;
     return this.jugadorService.listarPorPieHabil(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
@@ -111,7 +109,6 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   elegirCategoria(value: any){
-    this.seleccionadoCategoria = value;
     return this.jugadorService.listarPorCategoria(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
@@ -119,19 +116,21 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   restar(condicion: number){
-    if (condicion === 1){
+    const inputDefensas = 1;
+    const inputMediocampistas = 2;
+    const inputDelanteros = 3;
+    if (condicion === inputDefensas){
       this.cantidadEquipo = cantidadDeJugadores - this.mediocampistas - this.delanteros;
     }
-    else if (condicion === 2){
+    else if (condicion === inputMediocampistas){
       this.cantidadEquipo = cantidadDeJugadores - this.defensas - this.delanteros;
     }
-    else if (condicion === 3){
+    else if (condicion === inputDelanteros){
       this.cantidadEquipo = cantidadDeJugadores - this.mediocampistas - this.defensas;
     }
   }
 
   eliminar(id: number){
-    console.log(id);
     this.jugadorService.eliminar(id).subscribe(() => {
       this.router.navigateByUrl('/home', { replaceUrl: true });
       this.mensajeService.openSnackBar('Jugador eliminado corretamente', 'Success');

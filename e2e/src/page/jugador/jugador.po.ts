@@ -19,7 +19,14 @@ export class JugadorPage{
     private dialogo = element(by.id('mostrarDialogo'));
     private buttonRegistrarJugador = element(by.id('registrarJugador'));
     private buttonRegistrar = element(by.id('registrarJugador'));
-    private buttonConfirmar = element(by.id('si'));
+    deleteYesButton = () => element(by.id('si'));
+    private botonSiConfirmar = element(by.css('cdkFocusInitial'));
+
+    async clickBotonSi() {
+        browser.actions().mouseMove(this.botonSiConfirmar).perform();
+        browser.sleep(500);
+        await this.botonSiConfirmar.click();
+    }
 
     async clickCrearJugador(){
         browser.actions().mouseMove(this.linkCrearJugador).perform();
@@ -37,10 +44,6 @@ export class JugadorPage{
 
     obtenerBotonRegistrar(){
         return this.buttonRegistrar;
-    }
-
-    obtenerBotonConfirmar() {
-        return this.buttonConfirmar;
     }
 
     async clickListarJugadores(){

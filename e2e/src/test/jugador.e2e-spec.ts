@@ -1,6 +1,5 @@
 import { browser, ExpectedConditions } from "protractor";
 import { AppPage } from "../app.po";
-//import { BorrarJugadorDialogPage } from "../page/jugador/borrar-jugador.po";
 import { JugadorPage } from "../page/jugador/jugador.po";
 import { ListarJugadoresPage } from "../page/jugador/listar-jugadores.po";
 import { NavbarPage } from "../page/navbar/navbar.po";
@@ -10,14 +9,12 @@ describe('workspace-project Jugador', () => {
     let navBar: NavbarPage;
     let jugador: JugadorPage;
     let listaJugadores: ListarJugadoresPage;
-    //let borrarJugador: BorrarJugadorDialogPage;
 
     beforeEach(() => {
         page = new AppPage();
         navBar = new NavbarPage();
         jugador = new JugadorPage();
         listaJugadores = new ListarJugadoresPage();
-       // borrarJugador = new BorrarJugadorDialogPage();
     });
 
     it('Deberia crear jugador', () => {
@@ -97,7 +94,10 @@ describe('workspace-project Jugador', () => {
         /*const confirmar = jugador.obtenerBotonConfirmar();
         browser.wait(ExpectedConditions.visibilityOf(confirmar), 1000, 
         confirmar.locator());*/
-        //borrarJugador.clickBotonSi();
+        const delBtn = jugador.deleteYesButton();
+        browser.wait(ExpectedConditions.visibilityOf(delBtn), 1000, 
+        delBtn.locator());
+        delBtn.click();
 
         browser.switchTo().alert().accept();
         
