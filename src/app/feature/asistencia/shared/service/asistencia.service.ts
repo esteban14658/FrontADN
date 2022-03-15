@@ -3,12 +3,10 @@ import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 import { Asistencia } from '../model/asistencia';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AsistenciaService {
 
-  private url : string = `${environment.apiUrl}/asistencias`;
+  private url = `${environment.apiUrl}/asistencias`;
 
   constructor(protected http: HttpService) { }
 
@@ -17,5 +15,4 @@ export class AsistenciaService {
                                                 this.http.optsName('crear/actualizar asistencias'));
   }
 
-  
 }

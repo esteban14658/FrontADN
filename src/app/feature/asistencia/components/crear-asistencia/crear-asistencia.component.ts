@@ -77,8 +77,8 @@ export class CrearAsistenciaComponent implements OnInit {
     if (event.checked === true){
       this.listaDeId.push(id);
     } else {
-      this.listaDeId.forEach((element, index)=>{
-        if(element === id) {
+      this.listaDeId.forEach((element, index) => {
+        if (element === id) {
           this.listaDeId.splice(index, 1);
         }
       });

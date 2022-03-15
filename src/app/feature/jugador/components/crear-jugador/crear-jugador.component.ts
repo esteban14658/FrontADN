@@ -16,8 +16,8 @@ export class CrearJugadorComponent implements OnInit {
   jugadorForm: FormGroup;
   seleccionadoPosicion: string;
   seleccionadoPieHabil: string;
-  listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
-  listaPieHabil:string[]=["Derecho", "Izquierdo"];
+  listaPosiciones: string[] = ['Portero', 'Defensa', 'Mediocampista', 'Delantero'];
+  listaPieHabil: string[] = ['Derecho', 'Izquierdo'];
 
   constructor(protected jugadorService: JugadorService) { }
 

@@ -4,12 +4,10 @@ import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
 import { environment } from 'src/environments/environment';
 import { Factura } from '../model/factura';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class FacturaService {
 
-  private url : string = `${environment.apiUrl}/facturas`;
+  private url = `${environment.apiUrl}/facturas`;
 
   constructor(protected http: HttpService) { }
 

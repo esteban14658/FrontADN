@@ -18,7 +18,7 @@ describe('ListarJugadorComponent', () => {
     let fixture: ComponentFixture<ListarJugadorComponent>;
     let jugadorService: JugadorService;
     const listaJugadores: any[] = [
-        new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Portero', 'Derecho'), 
+        new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Portero', 'Derecho'),
         new Jugador(2, 1010102, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho')
       ];
 
@@ -28,8 +28,8 @@ describe('ListarJugadorComponent', () => {
         imports: [
             CommonModule,
             HttpClientModule,
-            RouterTestingModule, 
-            SharedModule, 
+            RouterTestingModule,
+            SharedModule,
             BrowserAnimationsModule
         ],
         providers: [JugadorService, HttpService]
@@ -53,4 +53,3 @@ describe('ListarJugadorComponent', () => {
     });
 
 });
-  

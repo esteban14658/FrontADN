@@ -15,23 +15,23 @@ const cantidadDeJugadores = 10;
   styleUrls: ['./listar-jugador.component.css']
 })
 export class ListarJugadorComponent implements OnInit {
-  displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaNacimiento', 
+  displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaNacimiento',
                                 'peso', 'altura', 'posicion', 'acciones'];
   dataSource = new MatTableDataSource<Jugador>();
   panelOpenState = false;
-  listaGeneral:string[]=["Listar todos", "Equipo aleatorio", "Listar por posicion", "Listar por pie habil", 
-                          "Listar por categoria"];
-  listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
-  listaPieHabil:string[]=["Derecho", "Izquierdo"];
+  listaGeneral: string[] = ['Listar todos', 'Equipo aleatorio', 'Listar por posicion', 'Listar por pie habil', 
+                          'Listar por categoria'];
+  listaPosiciones: string[] = ['Portero', 'Defensa', 'Mediocampista', 'Delantero'];
+  listaPieHabil: string[] = ['Derecho', 'Izquierdo'];
   listaJugadores: Jugador[];
   lista: number[];
   seleccionado: string;
   seleccionadoPosicion: string;
   seleccionadoPieHabil: string;
   seleccionadoCategoria: string;
-  mostrarDatosPosicion: Boolean = false;
-  mostrarDatosPieHabil: Boolean = false;
-  mostrarDatosCategoria: Boolean = false;
+  mostrarDatosPosicion: boolean = false;
+  mostrarDatosPieHabil: boolean = false;
+  mostrarDatosCategoria: boolean = false;
 
   defensas = 4;
   mediocampistas = 4;
@@ -40,9 +40,9 @@ export class ListarJugadorComponent implements OnInit {
 
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
-  constructor(protected jugadorService: JugadorService, 
+  constructor(protected jugadorService: JugadorService,
               private router: Router,
-              public dialogo: MatDialog, 
+              public dialogo: MatDialog,
               protected mensajeService: MensajeService) { }
 
   ngOnInit(){
@@ -54,7 +54,7 @@ export class ListarJugadorComponent implements OnInit {
    }
 
   elegirTipoDeLista(bandera: string){
-    if (bandera === "Listar todos"){
+    if (bandera === 'Listar todos'){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
@@ -62,26 +62,26 @@ export class ListarJugadorComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
       });
-    } else if (bandera === "Equipo aleatorio"){
+    } else if (bandera === 'Equipo aleatorio'){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
-      return this.jugadorService.equipoAleatorio(this.defensas.toString(), 
+      return this.jugadorService.equipoAleatorio(this.defensas.toString(),
       this.mediocampistas.toString(), this.delanteros.toString()).subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
       });
-    } else if (bandera === "Listar por posicion"){
+    } else if (bandera === 'Listar por posicion'){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = true;
       return this.elegirPosicion(this.seleccionadoPosicion);
-    } else if (bandera === "Listar por pie habil"){
+    } else if (bandera === 'Listar por pie habil'){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = true;
       return this.elegirPieHabil(this.seleccionadoPieHabil);
-    } else if (bandera === "Listar por categoria"){
+    } else if (bandera === 'Listar por categoria'){
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
       this.mostrarDatosCategoria = true;
@@ -138,12 +138,12 @@ export class ListarJugadorComponent implements OnInit {
         data: `¿Deseas eliminar al jugador?`
       })
       .afterClosed()
-      .subscribe((confirmado: Boolean) => {
+      .subscribe((confirmado: boolean) => {
         if (confirmado) {
           this.eliminar(id);
-          alert("¡Si!");
+          alert('¡Si!');
         } else {
-          alert("Cancelar");
+          alert('Cancelar');
         }
       });
   }

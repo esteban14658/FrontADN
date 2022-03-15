@@ -18,8 +18,8 @@ import { MaterialModule } from '@core/_material/_material.module';
     TrackByPipe
   ],
   imports: [
-    ReactiveFormsModule, 
-    FormsModule, 
+    ReactiveFormsModule,
+    FormsModule,
     MaterialModule
   ],
   exports: [

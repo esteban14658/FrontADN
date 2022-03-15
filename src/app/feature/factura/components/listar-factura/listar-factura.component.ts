@@ -20,12 +20,12 @@ export class ListarFacturaComponent implements OnInit {
   listarFacturas: Factura[];
 
   @ViewChild(MatSort, { static : true }) sort: MatSort;
-  displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaIngreso', 
+  displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaIngreso',
                                 'fechaCaducidad', 'valor', 'acciones'];
-  dataSource = new MatTableDataSource<Factura>()
+  dataSource = new MatTableDataSource<Factura>();
 
-  constructor(protected facturaService: FacturaService, 
-              protected router: Router, 
+  constructor(protected facturaService: FacturaService,
+              protected router: Router,
               private snackBar: MatSnackBar,
               public dialogo: MatDialog) { }
 
@@ -64,12 +64,12 @@ export class ListarFacturaComponent implements OnInit {
         data: `¿Deseas eliminar la factura?`
       })
       .afterClosed()
-      .subscribe((confirmado: Boolean) => {
+      .subscribe((confirmado: boolean) => {
         if (confirmado) {
           this.eliminar(id);
-          alert("¡Si!");
+          alert('¡Si!');
         } else {
-          alert("Cancelar");
+          alert('Cancelar');
         }
       });
   }

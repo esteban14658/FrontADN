@@ -10,8 +10,8 @@ export class Jugador{
     pieHabil: string;
     seleccionado: boolean;
 
-    constructor(id: number, documento: number, nombre: string, apellido: string, fechaNacimiento: string, 
-        peso: number, altura: number, posicion: string, pieHabil: string){
+    constructor(id: number, documento: number, nombre: string, apellido: string, fechaNacimiento: string,
+                peso: number, altura: number, posicion: string, pieHabil: string){
         this.id = id;
         this.documento = documento;
         this.nombre = nombre;
