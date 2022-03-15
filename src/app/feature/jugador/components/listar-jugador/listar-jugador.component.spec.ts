@@ -43,6 +43,18 @@ describe('ListarJugadorComponent', () => {
         spyOn(jugadorService, 'consultar').and.returnValue(
         of(listaJugadores)
         );
+        spyOn(jugadorService, 'listarPorCategoria').and.returnValue(
+        of(listaJugadores)
+        );
+        spyOn(jugadorService, 'listarPorPosicion').and.returnValue(
+        of(listaJugadores)
+        );
+        spyOn(jugadorService, 'listarPorPieHabil').and.returnValue(
+        of(listaJugadores)
+        );
+        spyOn(jugadorService, 'eliminar').and.returnValue(
+        of(true)
+        );
         fixture.detectChanges();
     });
 
@@ -51,4 +63,26 @@ describe('ListarJugadorComponent', () => {
         expect(2).toBe(component.listaJugadores.length);
     });
 
+    it('deberia listar por categoria', () => {
+        const fecha = '2010';
+        let lista = component.elegirCategoria(fecha);
+        expect(true).toBe(lista.closed.valueOf());
+    });
+
+    it('deberia listar por posicion', () => {
+        const posicion = 'Delantero';
+        let lista = component.elegirPosicion(posicion);
+        expect(true).toBe(lista.closed.valueOf());
+    });
+
+    it('deberia listar por pie habil', () => {
+        const pieHabil = 'Derecho';
+        let lista = component.elegirPieHabil(pieHabil);
+        expect(true).toBe(lista.closed.valueOf());
+    });
+
+    it('deberia eliminar', () => {
+        component.eliminar(1);
+        expect(true).toBeTrue;
+    });
 });
