@@ -51,9 +51,6 @@ export class ListarJugadorComponent implements OnInit {
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
     this.lista = this.jugadorService.listaDeAnios();
-    this.jugadorService.consultar().subscribe(data => {
-      this.listaJugadores = data;
-    });
    }
 
   elegirTipoDeLista(bandera: string){
@@ -61,7 +58,7 @@ export class ListarJugadorComponent implements OnInit {
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
-      return this.jugadorService.consultar().subscribe(data => {
+      this.jugadorService.consultar().subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
       });
@@ -69,33 +66,36 @@ export class ListarJugadorComponent implements OnInit {
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
-      return this.jugadorService.equipoAleatorio(this.defensas.toString(),
-      this.mediocampistas.toString(), this.delanteros.toString()).subscribe(data => {
+      this.jugadorService.equipoAleatorio(this.defensas.toString(), this.mediocampistas.toString(),
+      this.delanteros.toString()).subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
+        this.listaJugadores = data;
       });
     } else if (bandera === 'Listar por posicion'){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = true;
-      return this.elegirPosicion(this.seleccionadoPosicion);
+      this.elegirPosicion(this.seleccionadoPosicion);
     } else if (bandera === 'Listar por pie habil'){
       this.mostrarDatosCategoria = false;
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = true;
-      return this.elegirPieHabil(this.seleccionadoPieHabil);
+      this.elegirPieHabil(this.seleccionadoPieHabil);
     } else if (bandera === 'Listar por categoria'){
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
       this.mostrarDatosCategoria = true;
-      return this.elegirCategoria(this.seleccionadoCategoria);
+      this.elegirCategoria(this.seleccionadoCategoria);
     }
+    return this.listaJugadores;
   }
 
   elegirPosicion(value: string){
     return this.jugadorService.listarPorPosicion(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+      this.listaJugadores = data;
     });
   }
 
@@ -103,6 +103,7 @@ export class ListarJugadorComponent implements OnInit {
     return this.jugadorService.listarPorPieHabil(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+      this.listaJugadores = data;
     });
   }
 
@@ -110,6 +111,7 @@ export class ListarJugadorComponent implements OnInit {
     return this.jugadorService.listarPorCategoria(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+      this.listaJugadores = data;
     });
   }
 
