@@ -4,10 +4,10 @@ import { Jugador } from '../model/jugador';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class JugadorService {
 
-  private url = `${environment.apiUrl}/jugadores`;
+  private url  = `${environment.apiUrl}/jugadores`;
 
   constructor(protected http: HttpService) { }
 
@@ -32,7 +32,7 @@ export class JugadorService {
   }
 
   public listarPorPosicion(posicion: string){
-    return this.http.doGet<Jugador[]>(`${this.url}/${posicion}`);
+    return this.http.doGet<Jugador[]>(`${this.url}/${posicion}`)
   }
 
   public listarPorPieHabil(pieHabil: string){
@@ -54,9 +54,9 @@ export class JugadorService {
   }
 
   public listaDeAnios(){
-    let array = new Array();
-    let j = 0;
-    for (let i = 2010; i < 2030; i++){
+    var array = new Array();
+    var j = 0;
+    for (var i = 2010; i < 2030; i++){
       array[j] = i.toString();
       j++;
     }
