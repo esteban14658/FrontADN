@@ -23,6 +23,7 @@ export class ListarJugadorComponent implements OnInit {
                           "Listar por categoria"];
   listaPosiciones:string[]=["Portero", "Defensa", "Mediocampista", "Delantero"];
   listaPieHabil:string[]=["Derecho", "Izquierdo"];
+  listaJugadores: Jugador[];
   lista: number[];
   seleccionado: string;
   seleccionadoPosicion: string;
@@ -47,6 +48,9 @@ export class ListarJugadorComponent implements OnInit {
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
     this.lista = this.jugadorService.listaDeAnios();
+    this.jugadorService.consultar().subscribe(data => {
+      this.listaJugadores = data;
+    });
    }
 
   elegirTipoDeLista(bandera: string){

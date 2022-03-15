@@ -17,6 +17,7 @@ import { BorrarFacturaComponent } from '../borrar-factura/borrar-factura.compone
 export class ListarFacturaComponent implements OnInit {
 
   public listaFacturas: Observable<Factura[]>;
+  listarFacturas: Factura[];
 
   @ViewChild(MatSort, { static : true }) sort: MatSort;
   displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaIngreso', 
@@ -30,8 +31,9 @@ export class ListarFacturaComponent implements OnInit {
 
   ngOnInit(){
     this.listaFacturas = this.facturaService.consultar();
-    console.log(this.listar());
-    console.log(this.listaFacturas);
+    this.facturaService.consultar().subscribe(data => {
+      this.listarFacturas = data;
+    });
   }
 
   listar(){
