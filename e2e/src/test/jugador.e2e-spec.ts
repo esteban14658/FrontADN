@@ -32,7 +32,7 @@ describe('workspace-project Jugador', () => {
         jugador.clickCrearJugador();
 
         const formularioJugador = jugador.obtenerFormularioRegistroJugadores();
-        browser.wait(ExpectedConditions.visibilityOf(formularioJugador), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(formularioJugador), 1000,
         formularioJugador.locator());
 
         jugador.ingresarDocumento(DOCUMENTO);
@@ -45,7 +45,7 @@ describe('workspace-project Jugador', () => {
         jugador.ingresarPieHabil(PIE_HABIL);
 
         const botonRegistrarJugador = jugador.obtenerBotonRegistrar();
-        browser.wait(ExpectedConditions.visibilityOf(botonRegistrarJugador), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(botonRegistrarJugador), 1000,
         botonRegistrarJugador.locator());
 
         jugador.clickBotonRegistrarJugador();
@@ -85,10 +85,10 @@ describe('workspace-project Jugador', () => {
         jugador.ingresarTipoDeLista(LISTAR_TODOS);    
         listaJugadores.obtenerCeldas();
         const dialogo = jugador.obtenerDialogo();
-        browser.wait(ExpectedConditions.visibilityOf(dialogo), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(dialogo), 1000,
         dialogo.locator());
         const delBtn = jugador.deleteYesButton();
-        browser.wait(ExpectedConditions.visibilityOf(delBtn), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(delBtn), 1000,
         delBtn.locator());
         delBtn.click();
         browser.switchTo().alert().accept();

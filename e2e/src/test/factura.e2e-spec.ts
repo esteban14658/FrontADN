@@ -22,13 +22,13 @@ describe('workspace-project Factura', () => {
         navBar.clickBotonFacturas();
         factura.clickCrearFactura();
         const formularioFactura = factura.obtenerFormularioRegistroFacturas();
-        browser.wait(ExpectedConditions.visibilityOf(formularioFactura), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(formularioFactura), 1000,
         formularioFactura.locator());
         factura.ingresarJugador(JUGADOR);
         factura.ingresarDescripcion(DESCRIPCION);
         factura.ingresarMeses(MESES);
         const botonRegistrarFactura = factura.obtenerBotonRegistrar();
-        browser.wait(ExpectedConditions.visibilityOf(botonRegistrarFactura), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(botonRegistrarFactura), 1000,
         botonRegistrarFactura.locator());
         factura.clickBotonRegistrarFactura();
     });

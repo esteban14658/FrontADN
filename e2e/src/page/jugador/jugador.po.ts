@@ -18,8 +18,8 @@ export class JugadorPage{
     private dialogo = element(by.id('mostrarDialogo'));
     private buttonRegistrarJugador = element(by.id('registrarJugador'));
     private buttonRegistrar = element(by.id('registrarJugador'));
-    deleteYesButton = () => element(by.id('si'));
     private botonSiConfirmar = element(by.css('cdkFocusInitial'));
+    deleteYesButton = () => element(by.id('si'));
 
     async clickBotonSi() {
         browser.actions().mouseMove(this.botonSiConfirmar).perform();

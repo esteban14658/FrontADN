@@ -30,7 +30,7 @@ import { AsistenciaModule } from './feature/asistencia/asistencia.module';
     FacturaModule,
     AsistenciaModule,
     BrowserAnimationsModule,
-    MatTableModule, 
+    MatTableModule,
     MatSortModule,
     MatExpansionModule
   ],

@@ -38,7 +38,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatCardModule,
     MatSelectModule,
-    MatExpansionModule, 
+    MatExpansionModule,
     MatCheckboxModule
   ],
   exports: [
@@ -56,7 +56,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatCardModule,
     MatSelectModule,
-    MatExpansionModule, 
+    MatExpansionModule,
     MatCheckboxModule
   ]
 })

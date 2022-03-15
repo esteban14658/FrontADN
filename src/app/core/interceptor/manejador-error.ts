@@ -34,8 +34,8 @@ export class ManejadorError implements ErrorHandler {
     if (!environment.production) {
       this.snackBar.open(respuesta.mensaje.error.mensaje, 'Failed', {
         duration: 2000,
-	      verticalPosition: 'top',
-	      horizontalPosition: 'end'
+	        verticalPosition: 'top',
+	        horizontalPosition: 'end'
       });
       window.console.error('Error inesperado:\n', respuesta);
     }

@@ -19,11 +19,11 @@ describe('workspace-project Asistencia', () => {
         page.navigateTo();
         navBar.clickBotonAsistencias();
         const checkBox = asistencia.obtenerCheckBoxAsistencia();
-        browser.wait(ExpectedConditions.visibilityOf(checkBox), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(checkBox), 1000,
         checkBox.locator());
         asistencia.clickCheckboxRegitrarTodos();
         const botonRegistrar = asistencia.obtenerBotonRegistrarAsistencia();
-        browser.wait(ExpectedConditions.visibilityOf(botonRegistrar), 1000, 
+        browser.wait(ExpectedConditions.visibilityOf(botonRegistrar), 1000,
         botonRegistrar.locator());
         asistencia.clickBotonRegistrarAsistencia();
     });
