@@ -62,8 +62,7 @@ export class ListarJugadorComponent implements OnInit {
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosPosicion = false;
       this.jugadorService.consultar().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
+        this.llenarDatasource(data);
       });
     } else if (bandera === 'Equipo aleatorio'){
       this.mostrarDatosCategoria = false;
@@ -71,9 +70,7 @@ export class ListarJugadorComponent implements OnInit {
       this.mostrarDatosPosicion = false;
       this.jugadorService.equipoAleatorio(this.defensas.toString(), this.mediocampistas.toString(),
       this.delanteros.toString()).subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
-        this.listaJugadores = data;
+        this.llenarDatasource(data);
       });
     } else if (bandera === 'Listar por posicion'){
       this.mostrarDatosCategoria = false;
@@ -96,26 +93,26 @@ export class ListarJugadorComponent implements OnInit {
 
   elegirPosicion(value: string){
     return this.jugadorService.listarPorPosicion(value).subscribe(data => {
-      this.listaJugadores = data;
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
+      this.llenarDatasource(data);
     });
   }
 
   elegirPieHabil(value: string){
     return this.jugadorService.listarPorPieHabil(value).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.listaJugadores = data;
-      this.dataSource.sort = this.sort;
+      this.llenarDatasource(data);
     });
   }
 
   elegirCategoria(value: string){
     return this.jugadorService.listarPorCategoria(value).subscribe(data => {
-      this.dataSource.sort = this.sort;
-      this.listaJugadores = data;
-      this.dataSource = new MatTableDataSource(data);
+      this.llenarDatasource(data);
     });
+  }
+
+  llenarDatasource(data: Jugador[]){
+    this.dataSource = new MatTableDataSource(data);
+    this.dataSource.sort = this.sort;
+    this.listaJugadores = data;
   }
 
   restar(condicion: number){

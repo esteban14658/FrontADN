@@ -12,7 +12,6 @@ import { SharedModule } from '@shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-
 describe('ListarJugadorComponent', () => {
     let component: ListarJugadorComponent;
     let fixture: ComponentFixture<ListarJugadorComponent>;
