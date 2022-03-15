@@ -1,16 +1,16 @@
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpService } from "@core/services/http.service";
-import { SharedModule } from "@shared/shared.module";
-import { of } from "rxjs";
-import { Jugador } from "src/app/feature/jugador/shared/model/jugador";
-import { JugadorService } from "src/app/feature/jugador/shared/service/jugador.service";
-import { Asistencia } from "../../shared/model/asistencia";
-import { AsistenciaService } from "../../shared/service/asistencia.service";
-import { CrearAsistenciaComponent } from "./crear-asistencia.component";
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpService } from '@core/services/http.service';
+import { SharedModule } from '@shared/shared.module';
+import { of } from 'rxjs';
+import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.service';
+import { Asistencia } from '../../shared/model/asistencia';
+import { AsistenciaService } from '../../shared/service/asistencia.service';
+import { CrearAsistenciaComponent } from './crear-asistencia.component';
 
 
 describe('CrearAsistenciaComponent', () => {
@@ -29,8 +29,8 @@ describe('CrearAsistenciaComponent', () => {
         imports: [
             CommonModule,
             HttpClientModule,
-            RouterTestingModule, 
-            SharedModule, 
+            RouterTestingModule,
+            SharedModule,
             BrowserAnimationsModule
         ],
         providers: [AsistenciaService, JugadorService, HttpService]

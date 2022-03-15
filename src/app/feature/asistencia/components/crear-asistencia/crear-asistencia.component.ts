@@ -25,7 +25,7 @@ export class CrearAsistenciaComponent implements OnInit {
   myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   jugador: Jugador = new Jugador(0, 123, 'Pablo', 'Perez', this.myDate, 45.7, 1.65, 'Delantero', 'Derecho');
   asistencia: Asistencia = new Asistencia(0, this.myDate, this.jugador);
-  displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento', 
+  displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento',
                                 'peso', 'altura', 'posicion'];
   dataSource = new MatTableDataSource<Jugador>();
   selection = new SelectionModel<Jugador>(true, []);
@@ -33,7 +33,7 @@ export class CrearAsistenciaComponent implements OnInit {
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   constructor(protected asistenciaService: AsistenciaService,
-              protected jugadorService: JugadorService, 
+              protected jugadorService: JugadorService,
               protected router: Router) { }
 
   ngOnInit(){
@@ -73,17 +73,19 @@ export class CrearAsistenciaComponent implements OnInit {
     }
   }
 
-  showOptions(event:MatCheckboxChange, id: number) {
+  showOptions(event: MatCheckboxChange, id: number) {
     if (event.checked === true){
       this.listaDeId.push(id);
     } else {
-      this.listaDeId.forEach((element,index)=>{
-        if(element==id) this.listaDeId.splice(index,1);
+      this.listaDeId.forEach((element, index)=>{
+        if(element === id) {
+          this.listaDeId.splice(index, 1);
+        }
       });
-    }    
+    }
   }
 
-  showsOptions(event:MatCheckboxChange): void {
+  showsOptions(event: MatCheckboxChange): void {
     this.listaDeId = [];
     this.masterToggle();
     if (event.checked === true){

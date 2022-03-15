@@ -82,7 +82,7 @@ describe('workspace-project Jugador', () => {
         page.navigateTo();
         navBar.clickBotonJugadores();
         jugador.clickListarJugadores();
-        jugador.ingresarTipoDeLista(LISTAR_TODOS);    
+        jugador.ingresarTipoDeLista(LISTAR_TODOS);
         listaJugadores.obtenerCeldas();
         const dialogo = jugador.obtenerDialogo();
         browser.wait(ExpectedConditions.visibilityOf(dialogo), 1000,
