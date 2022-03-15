@@ -9,6 +9,9 @@ import { JugadorService } from '../../shared/service/jugador.service';
 import { BorrarJugadorComponent } from '../borrar-jugador/borrar-jugador.component';
 
 const cantidadDeJugadores = 10;
+const NUMERO_INICIAL_DEFENSAS = 4;
+const NUMERO_INCIAL_MEDIOCAMPISTAS = 4;
+const NUMERO_INICIAL_DELANTEROS = 2;
 @Component({
   selector: 'app-listar-jugador',
   templateUrl: './listar-jugador.component.html',
@@ -29,13 +32,13 @@ export class ListarJugadorComponent implements OnInit {
   seleccionadoPosicion: string;
   seleccionadoPieHabil: string;
   seleccionadoCategoria: string;
-  mostrarDatosPosicion: boolean = false;
-  mostrarDatosPieHabil: boolean = false;
-  mostrarDatosCategoria: boolean = false;
+  mostrarDatosPosicion = false;
+  mostrarDatosPieHabil = false;
+  mostrarDatosCategoria = false;
 
-  defensas = 4;
-  mediocampistas = 4;
-  delanteros = 2;
+  defensas = NUMERO_INICIAL_DEFENSAS;
+  mediocampistas = NUMERO_INCIAL_MEDIOCAMPISTAS;
+  delanteros = NUMERO_INICIAL_DELANTEROS;
   cantidadEquipo = 0;
 
   @ViewChild(MatSort, { static : true }) sort: MatSort;
@@ -89,21 +92,21 @@ export class ListarJugadorComponent implements OnInit {
     }
   }
 
-  elegirPosicion(value: any){
+  elegirPosicion(value: string){
     return this.jugadorService.listarPorPosicion(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
     });
   }
 
-  elegirPieHabil(value: any){
+  elegirPieHabil(value: string){
     return this.jugadorService.listarPorPieHabil(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
     });
   }
 
-  elegirCategoria(value: any){
+  elegirCategoria(value: string){
     return this.jugadorService.listarPorCategoria(value).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;

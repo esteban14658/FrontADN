@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { MensajeService } from '@core/services/mensaje.service';
 import { Observable } from 'rxjs';
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
@@ -26,7 +26,7 @@ export class ListarFacturaComponent implements OnInit {
 
   constructor(protected facturaService: FacturaService,
               protected router: Router,
-              private snackBar: MatSnackBar,
+              protected mensajeService: MensajeService,
               public dialogo: MatDialog) { }
 
   ngOnInit(){
@@ -44,21 +44,13 @@ export class ListarFacturaComponent implements OnInit {
   }
 
   eliminar(id: number){
-    console.log(id);
     this.facturaService.eliminar(id).subscribe(() => {
       this.router.navigateByUrl('/home', { replaceUrl: true });
-      this.openSnackBar();
-    });
-  }
-
-  openSnackBar() {
-    this.snackBar.open('Factura eliminada correctamente', 'Success', {
-      duration: 2000
+      this.mensajeService.openSnackBar('Factura eliminada correctamente', 'Success');
     });
   }
 
   mostrarDialogo(id: number): void {
-    console.log(id);
     this.dialogo
       .open(BorrarFacturaComponent, {
         data: `¿Deseas eliminar la factura?`

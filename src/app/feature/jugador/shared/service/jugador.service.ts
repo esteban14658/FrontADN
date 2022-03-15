@@ -4,6 +4,8 @@ import { Jugador } from '../model/jugador';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 
+const FECHA_INICIAL = 2010;
+const FECHA_FINAL = 2030;
 @Injectable({ providedIn: 'root' })
 export class JugadorService {
 
@@ -32,7 +34,7 @@ export class JugadorService {
   }
 
   public listarPorPosicion(posicion: string){
-    return this.http.doGet<Jugador[]>(`${this.url}/${posicion}`)
+    return this.http.doGet<Jugador[]>(`${this.url}/${posicion}`);
   }
 
   public listarPorPieHabil(pieHabil: string){
@@ -54,9 +56,9 @@ export class JugadorService {
   }
 
   public listaDeAnios(){
-    var array = new Array();
-    var j = 0;
-    for (var i = 2010; i < 2030; i++){
+    let array = new Array();
+    let j = 0;
+    for (let i = FECHA_INICIAL; i < FECHA_FINAL; i++){
       array[j] = i.toString();
       j++;
     }

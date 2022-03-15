@@ -9,6 +9,11 @@ import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { MensajeService } from '@core/services/mensaje.service';
 
+const UN_MES = 1;
+const TRES_MESES = 3;
+const SEIS_MESES = 6;
+
+const VALOR_MAXIMO = 1000000;
 @Component({
   selector: 'app-crear-factura',
   templateUrl: './crear-factura.component.html',
@@ -25,7 +30,7 @@ export class CrearFacturaComponent implements OnInit {
 
   displayedJugadores: Jugador[];
 
-  meses: number[] = [1, 3, 6];
+  meses: number[] = [UN_MES, TRES_MESES, SEIS_MESES];
 
   facturaForm: FormGroup;
   seleccionado: Jugador;
@@ -72,14 +77,14 @@ export class CrearFacturaComponent implements OnInit {
   construirFormulario(){
     this.facturaForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      valor: new FormControl('', [Validators.min(0), Validators.max(1000000)]),
+      valor: new FormControl('', [Validators.min(0), Validators.max(VALOR_MAXIMO)]),
       fechaIngreso: new FormControl('', [Validators.required]),
       fechaCaducidad: new FormControl('', [Validators.required]),
       jugador: new FormControl('', [Validators.required]),
       estado: new FormControl('', [Validators.min(0), Validators.max(1)]),
       descripcion: new FormControl('', [Validators.required]),
       meses: new FormControl('', [Validators.required, Validators.min(1),
-                                  Validators.max(6)])
+                                  Validators.max(SEIS_MESES)])
     });
   }
 

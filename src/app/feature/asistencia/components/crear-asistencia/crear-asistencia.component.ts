@@ -10,6 +10,10 @@ import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.s
 import { Asistencia } from '../../shared/model/asistencia';
 import { AsistenciaService } from '../../shared/service/asistencia.service';
 
+const ID_GENERICO = 0;
+const DOCUMENTO_GENERICO = 123;
+const PESO_GENERICO = 45.7;
+const ALTURA_GENERICA = 1.65;
 @Component({
   selector: 'app-crear-asistencia',
   templateUrl: './crear-asistencia.component.html',
@@ -23,7 +27,7 @@ export class CrearAsistenciaComponent implements OnInit {
   listaDeId: number[] = [];
 
   myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-  jugador: Jugador = new Jugador(0, 123, 'Pablo', 'Perez', this.myDate, 45.7, 1.65, 'Delantero', 'Derecho');
+  jugador: Jugador = new Jugador(ID_GENERICO, DOCUMENTO_GENERICO, 'Pablo', 'Perez', this.myDate, PESO_GENERICO, ALTURA_GENERICA, 'Delantero', 'Derecho');
   asistencia: Asistencia = new Asistencia(0, this.myDate, this.jugador);
   displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento',
                                 'peso', 'altura', 'posicion'];
@@ -60,11 +64,11 @@ export class CrearAsistenciaComponent implements OnInit {
     });
   }
 
-  async agregar(){
+  agregar(){
     if (this.listaDeId !== null) {
       this.listaDeId.forEach(async x => {
         this.asistencia.jugador.id = x;
-        await this.asistenciaService.guardar(this.asistencia).subscribe(() => {
+        this.asistenciaService.guardar(this.asistencia).subscribe(() => {
         });
       });
       this.router.navigateByUrl('/home', { replaceUrl: true });
