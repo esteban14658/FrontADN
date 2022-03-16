@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MensajeService } from '@core/services/mensaje.service';
+import { DtoPosiciones } from '../../shared/model/dtoPosiciones';
 import { Jugador } from '../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 import { BorrarJugadorComponent } from '../borrar-jugador/borrar-jugador.component';
@@ -12,6 +13,12 @@ const cantidadDeJugadores = 10;
 const NUMERO_INICIAL_DEFENSAS = 4;
 const NUMERO_INCIAL_MEDIOCAMPISTAS = 4;
 const NUMERO_INICIAL_DELANTEROS = 2;
+
+const POSICION = 'Listar por posicion';
+const PIE_HABIL = 'Listar por pie habil';
+const CATEGORIA = 'Listar por categoria';
+const LISTAR_TODOS = 'Listar todos';
+const EQUIPO_ALEATORIO = 'Equipo aleatorio';
 @Component({
   selector: 'app-listar-jugador',
   templateUrl: './listar-jugador.component.html',
@@ -57,49 +64,56 @@ export class ListarJugadorComponent implements OnInit {
    }
 
   elegirTipoDeLista(bandera: string){
-    if (bandera === 'Listar todos'){
-      this.mostrarDatosCategoria = false;
-      this.mostrarDatosPieHabil = false;
+    this.filtro(bandera, new DtoPosiciones(this.defensas.toString(),
+                         this.mediocampistas.toString(),
+                         this.delanteros.toString()));
+  }
+
+  filtro(eleccion: string, dto: DtoPosiciones){
+    if (eleccion === LISTAR_TODOS){
       this.mostrarDatosPosicion = false;
+      this.mostrarDatosPieHabil = false;
+      this.mostrarDatosCategoria = false;
       this.jugadorService.consultar().subscribe(data => {
         this.llenarDatasource(data);
       });
-    } else if (bandera === 'Equipo aleatorio'){
-      this.mostrarDatosCategoria = false;
-      this.mostrarDatosPieHabil = false;
-      this.mostrarDatosPosicion = false;
-      this.jugadorService.equipoAleatorio(this.defensas.toString(), this.mediocampistas.toString(),
-      this.delanteros.toString()).subscribe(data => {
-        this.llenarDatasource(data);
-      });
-    } else if (bandera === 'Listar por posicion'){
-      this.mostrarDatosCategoria = false;
-      this.mostrarDatosPieHabil = false;
+    } else if (eleccion === POSICION){
       this.mostrarDatosPosicion = true;
-      this.elegirPosicion(this.seleccionadoPosicion);
-    } else if (bandera === 'Listar por pie habil'){
+      this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = false;
+      this.elegirPosicion(this.seleccionadoPosicion);
+    } else if (eleccion === PIE_HABIL){
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = true;
+      this.mostrarDatosCategoria = false;
       this.elegirPieHabil(this.seleccionadoPieHabil);
-    } else if (bandera === 'Listar por categoria'){
-      this.mostrarDatosPieHabil = false;
+    } else if (eleccion === CATEGORIA){
       this.mostrarDatosPosicion = false;
+      this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = true;
       this.elegirCategoria(this.seleccionadoCategoria);
+    } else if (eleccion === EQUIPO_ALEATORIO){
+      this.mostrarDatosPosicion = false;
+      this.mostrarDatosPieHabil = false;
+      this.mostrarDatosCategoria = false;
+      this.jugadorService.equipoAleatorio(dto.defensas, dto.mediocampistas, dto.delanteros).subscribe(data => {
+        this.llenarDatasource(data);
+      });
     }
     return this.listaJugadores;
   }
 
   elegirPosicion(value: string){
-    return this.jugadorService.listarPorPosicion(value).subscribe(data => {
-      this.llenarDatasource(data);
+    return this.jugadorService.consultar().subscribe(data => {
+      this.listaJugadores = data.filter(fitro => fitro.posicion === value);
+      this.llenarDatasource(this.listaJugadores);
     });
   }
 
   elegirPieHabil(value: string){
-    return this.jugadorService.listarPorPieHabil(value).subscribe(data => {
-      this.llenarDatasource(data);
+    return this.jugadorService.consultar().subscribe(data => {
+      this.listaJugadores = data.filter(filtro => filtro.pieHabil === value);
+      this.llenarDatasource(this.listaJugadores);
     });
   }
 
@@ -113,6 +127,7 @@ export class ListarJugadorComponent implements OnInit {
     this.dataSource = new MatTableDataSource(data);
     this.dataSource.sort = this.sort;
     this.listaJugadores = data;
+    return this.listaJugadores;
   }
 
   restar(condicion: number){
@@ -128,6 +143,13 @@ export class ListarJugadorComponent implements OnInit {
     else if (condicion === inputDelanteros){
       this.cantidadEquipo = cantidadDeJugadores - this.mediocampistas - this.defensas;
     }
+  }
+
+  filtrar(){
+    return this.jugadorService.consultar().subscribe(data => {
+      this.listaJugadores = data.filter(fitro => 
+        fitro.posicion === 'posicion');
+    });
   }
 
   eliminar(id: number){

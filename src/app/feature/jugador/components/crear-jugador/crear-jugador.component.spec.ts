@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { CommonModule, formatDate } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
@@ -15,7 +15,6 @@ describe('CrearJugadorComponent', () => {
   let component: CrearJugadorComponent;
   let fixture: ComponentFixture<CrearJugadorComponent>;
   let jugadorService: JugadorService;
-  let myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -58,7 +57,7 @@ describe('CrearJugadorComponent', () => {
     component.jugadorForm.controls.documento.setValue(10101020);
     component.jugadorForm.controls.nombre.setValue('Ricardo');
     component.jugadorForm.controls.apellido.setValue('Marquez');
-    component.jugadorForm.controls.fechaNacimiento.setValue(myDate);
+    component.jugadorForm.controls.fechaNacimiento.setValue('2013-02-13');
     component.jugadorForm.controls.peso.setValue(45.7);
     component.jugadorForm.controls.altura.setValue(1.84);
     component.jugadorForm.controls.posicion.setValue('Delantero');

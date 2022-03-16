@@ -28,13 +28,11 @@ describe('FacturaService', () => {
     });
 
     it('deberia listar facturas', () => {
-        const jugador1 = new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Delantero', 'Derecho');
-        const jugador2 = new Jugador(2, 1010102, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Portero', 'Derecho');
+        const jugador1 = new Jugador(1);
+        const jugador2 = new Jugador(2);
         const dummyFacturas = [
-            new Factura(1, 100000, '2022-02-14', '2022-05-14', jugador1, 1,
-                        'Tres meses', 3),
-            new Factura(1, 100000, '2022-02-14', '2022-05-14', jugador2, 1,
-                        'Tres meses', 3)
+            new Factura(1, jugador1, 'Tres meses', 3),
+            new Factura(2, jugador2, 'Tres meses', 3)
         ];
         service.consultar().subscribe(respuesta => {
             expect(respuesta.length).toBe(2);
@@ -47,9 +45,9 @@ describe('FacturaService', () => {
 
     it('deberia listar jugadores sin facturas', () => {
         const dummyJugadores = [
-          new Jugador(2, 1010102, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho'),
-          new Jugador(3, 1010103, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Defensa', 'Derecho'),
-          new Jugador(4, 1010104, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho')
+          new Jugador(2),
+          new Jugador(3),
+          new Jugador(4)
         ];
         service.listarJugadoresSinFactura().subscribe(respuesta => {
           expect(respuesta.length).toBe(3);
@@ -61,9 +59,8 @@ describe('FacturaService', () => {
     });
 
     it('deberia crear una factura', () => {
-      const jugador = new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Delantero', 'Derecho');
-      const dummyFactura = new Factura(1, 100000, '2022-02-14', '2022-05-14', jugador, 1,
-                                        'Tres meses', 3);
+      const jugador = new Jugador(1);
+      const dummyFactura = new Factura(1, jugador, 'Tres meses', 3);
       service.guardar(dummyFactura).subscribe((respuesta) => {
         expect(respuesta).toEqual(true);
       });
@@ -73,9 +70,8 @@ describe('FacturaService', () => {
     });
 
     it('deberia eliminar un jugador', () => {
-        const jugador = new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Delantero', 'Derecho');
-        const dummyFactura = new Factura(1, 100000, '2022-02-14', '2022-05-14', jugador, 1,
-                                        'Tres meses', 3);
+      const jugador = new Jugador(1);
+      const dummyFactura = new Factura(1, jugador, 'Tres meses', 3);
         service.eliminar(dummyFactura.id).subscribe((respuesta) => {
           expect(respuesta).toEqual(true);
         });

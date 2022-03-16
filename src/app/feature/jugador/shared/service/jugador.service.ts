@@ -6,10 +6,11 @@ import { HttpParams } from '@angular/common/http';
 
 const FECHA_INICIAL = 2010;
 const FECHA_FINAL = 2030;
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class JugadorService {
 
   private url  = `${environment.apiUrl}/jugadores`;
+  listaJugador: Jugador[];
 
   constructor(protected http: HttpService) { }
 
@@ -31,14 +32,6 @@ export class JugadorService {
 
   public obtenerPorDocumento(documento: number){
     return this.http.doGet<Jugador>(`${this.url}/jugador/${documento}`);
-  }
-
-  public listarPorPosicion(posicion: string){
-    return this.http.doGet<Jugador[]>(`${this.url}/${posicion}`);
-  }
-
-  public listarPorPieHabil(pieHabil: string){
-    return this.http.doGet<Jugador[]>(`${this.url}/jugadores/${pieHabil}`);
   }
 
   public listarPorCategoria(fecha: string){

@@ -13,7 +13,6 @@ const UN_MES = 1;
 const TRES_MESES = 3;
 const SEIS_MESES = 6;
 
-const VALOR_MAXIMO = 1000000;
 @Component({
   selector: 'app-crear-factura',
   templateUrl: './crear-factura.component.html',
@@ -47,22 +46,15 @@ export class CrearFacturaComponent implements OnInit {
   }
 
   crear(){
-    let factura = new Factura(
-      this.facturaForm.value['id'],
-      this.facturaForm.value['valor'],
-      this.facturaForm.value['fechaIngreso'],
-      this.facturaForm.value['fechaCaducidad'],
-      this.facturaForm.value['jugador'],
-      this.facturaForm.value['estado'],
+    let factura = new Factura(1,
+      this.seleccionado,
       this.facturaForm.value['descripcion'],
-      this.facturaForm.value['meses']
-    );
-    factura.id = 1;
+      this.facturaForm.value['meses']);
     factura.valor = 100000;
     factura.fechaIngreso = '2022-04-25';
     factura.fechaCaducidad = '2022-07-25';
     factura.estado = 1;
-    factura.jugador = this.seleccionado;
+
     if (this.seleccionado !== null){
       this.facturaService.guardar(factura).subscribe(() => {
         this.facturaForm.reset();
@@ -76,12 +68,7 @@ export class CrearFacturaComponent implements OnInit {
 
   construirFormulario(){
     this.facturaForm = new FormGroup({
-      id: new FormControl('', [Validators.required]),
-      valor: new FormControl('', [Validators.min(0), Validators.max(VALOR_MAXIMO)]),
-      fechaIngreso: new FormControl('', [Validators.required]),
-      fechaCaducidad: new FormControl('', [Validators.required]),
       jugador: new FormControl('', [Validators.required]),
-      estado: new FormControl('', [Validators.min(0), Validators.max(1)]),
       descripcion: new FormControl('', [Validators.required]),
       meses: new FormControl('', [Validators.required, Validators.min(1),
                                   Validators.max(SEIS_MESES)])

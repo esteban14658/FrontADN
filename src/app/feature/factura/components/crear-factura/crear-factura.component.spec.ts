@@ -17,8 +17,8 @@ describe('CrearFacturaComponent', () => {
     let fixture: ComponentFixture<CrearFacturaComponent>;
     let facturaService: FacturaService;
     const listaJugadores: any[] = [
-        new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Portero', 'Derecho'),
-        new Jugador(2, 1010102, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho')
+        new Jugador(1),
+        new Jugador(2)
       ];
 
     beforeEach(waitForAsync(() => {
@@ -57,8 +57,9 @@ describe('CrearFacturaComponent', () => {
     });
 
     it('Registrando jugador', () => {
+      let jugador = new Jugador(1);
       expect(component.facturaForm.valid).toBeFalsy();
-      component.facturaForm.controls.jugador.setValue(1);
+      component.facturaForm.controls.jugador.setValue(jugador);
       component.facturaForm.controls.meses.setValue(3);
       component.facturaForm.controls.descripcion.setValue('Tres meses');
 

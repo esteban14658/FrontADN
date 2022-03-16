@@ -17,8 +17,8 @@ describe('ListarJugadorComponent', () => {
     let fixture: ComponentFixture<ListarJugadorComponent>;
     let jugadorService: JugadorService;
     const listaJugadores: any[] = [
-        new Jugador(1, 1010101, 'Esteban', 'Beltran', '2010-08-11', 67.3, 1.80, 'Portero', 'Derecho'),
-        new Jugador(2, 1010102, 'Juan', 'Beltran', '2012-03-11', 45.3, 1.65, 'Defensa', 'Derecho')
+        new Jugador(1),
+        new Jugador(2)
       ];
 
     beforeEach(waitForAsync(() => {
@@ -44,12 +44,6 @@ describe('ListarJugadorComponent', () => {
         of(listaJugadores)
         );
         spyOn(jugadorService, 'listarPorCategoria').and.returnValue(
-        of(listaJugadores)
-        );
-        spyOn(jugadorService, 'listarPorPosicion').and.returnValue(
-        of(listaJugadores)
-        );
-        spyOn(jugadorService, 'listarPorPieHabil').and.returnValue(
         of(listaJugadores)
         );
         spyOn(jugadorService, 'eliminar').and.returnValue(

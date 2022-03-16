@@ -27,16 +27,16 @@ export class CrearJugadorComponent implements OnInit {
 
   crear(){
     let jugador = new Jugador(
-      this.jugadorForm.value['id'],
-      this.jugadorForm.value['documento'],
-      this.jugadorForm.value['nombre'],
-      this.jugadorForm.value['apellido'],
-      this.jugadorForm.value['fechaNacimiento'],
-      this.jugadorForm.value['peso'],
-      this.jugadorForm.value['altura'],
-      this.jugadorForm.value['posicion'],
-      this.jugadorForm.value['pieHabil']
+      this.jugadorForm.value['id']
     );
+    jugador.documento = this.jugadorForm.value['documento'];
+    jugador.nombre = this.jugadorForm.value['nombre'];
+    jugador.apellido = this.jugadorForm.value['apellido'];
+    jugador.fechaNacimiento = this.jugadorForm.value['fechaNacimiento'];
+    jugador.peso = this.jugadorForm.value['peso'];
+    jugador.altura = this.jugadorForm.value['altura'];
+    jugador.posicion = this.jugadorForm.value['posicion'];
+    jugador.pieHabil = this.jugadorForm.value['pieHabil'];
     this.jugadorService.guardar(jugador).subscribe(() => {
       this.jugadorForm.reset();
     });

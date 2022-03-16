@@ -4,7 +4,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MensajeService } from '@core/services/mensaje.service';
-import { Observable } from 'rxjs';
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { BorrarFacturaComponent } from '../borrar-factura/borrar-factura.component';
@@ -16,7 +15,6 @@ import { BorrarFacturaComponent } from '../borrar-factura/borrar-factura.compone
 })
 export class ListarFacturaComponent implements OnInit {
 
-  public listaFacturas: Observable<Factura[]>;
   listarFacturas: Factura[];
 
   @ViewChild(MatSort, { static : true }) sort: MatSort;
@@ -30,16 +28,10 @@ export class ListarFacturaComponent implements OnInit {
               public dialogo: MatDialog) { }
 
   ngOnInit(){
-    this.listaFacturas = this.facturaService.consultar();
     this.facturaService.consultar().subscribe(data => {
-      this.listarFacturas = data;
-    });
-  }
-
-  listar(){
-    return this.facturaService.consultar().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
+      this.listarFacturas = data;
     });
   }
 

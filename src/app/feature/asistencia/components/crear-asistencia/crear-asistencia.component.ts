@@ -10,10 +10,6 @@ import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.s
 import { Asistencia } from '../../shared/model/asistencia';
 import { AsistenciaService } from '../../shared/service/asistencia.service';
 
-const ID_GENERICO = 0;
-const DOCUMENTO_GENERICO = 123;
-const PESO_GENERICO = 45.7;
-const ALTURA_GENERICA = 1.65;
 @Component({
   selector: 'app-crear-asistencia',
   templateUrl: './crear-asistencia.component.html',
@@ -27,9 +23,9 @@ export class CrearAsistenciaComponent implements OnInit {
   listaDeId: number[] = [];
 
   myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-  jugador: Jugador = new Jugador(ID_GENERICO, DOCUMENTO_GENERICO, 'Pablo', 'Perez', this.myDate, PESO_GENERICO, ALTURA_GENERICA, 'Delantero', 'Derecho');
+  jugador: Jugador = new Jugador(1);
   asistencia: Asistencia = new Asistencia(0, this.myDate, this.jugador);
-  displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento',
+  displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento', 
                                 'peso', 'altura', 'posicion'];
   dataSource = new MatTableDataSource<Jugador>();
   selection = new SelectionModel<Jugador>(true, []);
@@ -37,7 +33,7 @@ export class CrearAsistenciaComponent implements OnInit {
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   constructor(protected asistenciaService: AsistenciaService,
-              protected jugadorService: JugadorService,
+              protected jugadorService: JugadorService, 
               protected router: Router) { }
 
   ngOnInit(){
@@ -61,35 +57,30 @@ export class CrearAsistenciaComponent implements OnInit {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.listaJugadores = data;
+      
     });
   }
 
-  agregar(){
-    if (this.listaDeId !== null) {
-      this.listaDeId.forEach(async x => {
-        this.asistencia.jugador.id = x;
-        this.asistenciaService.guardar(this.asistencia).subscribe(() => {
-        });
+  async agregar(){
+    this.listaDeId.forEach(async x => {
+      this.asistencia.jugador.id = x;
+      await this.asistenciaService.guardar(this.asistencia).subscribe(() => {
       });
-      this.router.navigateByUrl('/home', { replaceUrl: true });
-    } else {
-      this.router.navigateByUrl('/jugador', { replaceUrl: true });
-    }
+    });
+    this.router.navigateByUrl('/home', { replaceUrl: true });
   }
 
-  showOptions(event: MatCheckboxChange, id: number) {
+  showOptions(event:MatCheckboxChange, id: number) {
     if (event.checked === true){
       this.listaDeId.push(id);
     } else {
-      this.listaDeId.forEach((element, index) => {
-        if (element === id) {
-          this.listaDeId.splice(index, 1);
-        }
+      this.listaDeId.forEach((element,index)=>{
+        if(element==id) this.listaDeId.splice(index,1);
       });
-    }
+    }    
   }
 
-  showsOptions(event: MatCheckboxChange): void {
+  showsOptions(event:MatCheckboxChange): void {
     this.listaDeId = [];
     this.masterToggle();
     if (event.checked === true){

@@ -8,6 +8,9 @@ import { ErrorCamposPlantillaComponent } from './directivas/error-campos/compone
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrackByPipe } from './pipe/track-by.pipe';
 import { MaterialModule } from '@core/_material/_material.module';
+import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.service';
+import { FacturaService } from '../feature/factura/shared/service/factura.service';
+import { AsistenciaService } from '../feature/asistencia/shared/service/asistencia.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { MaterialModule } from '@core/_material/_material.module';
     FormsModule,
     MaterialModule,
     TrackByPipe
-  ]
+  ], 
+  providers: [JugadorService, FacturaService, AsistenciaService]
 })
 export class SharedModule { }

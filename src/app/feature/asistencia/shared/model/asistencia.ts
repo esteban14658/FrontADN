@@ -1,4 +1,4 @@
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { Jugador } from "src/app/feature/jugador/shared/model/jugador";
 
 export class Asistencia {
     id: number;
