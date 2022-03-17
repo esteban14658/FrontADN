@@ -52,7 +52,7 @@ describe('CrearAsistenciaComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-        expect(3).toBe(component.listaJugadores.length);
+        expect(2).toBe(component.listaJugadores.length);
     });
 
     it('Registrando asistencias', () => {
