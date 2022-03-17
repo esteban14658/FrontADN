@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { MensajeService } from '@shared/services/mensaje.service';
 import { Jugador } from '../../../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 
@@ -19,16 +21,30 @@ const VALOR_MINIMO_PERMITIDO_DE_DOCUMENTO = 10000000;
 })
 export class CrearJugadorComponent implements OnInit {
 
+  id: number;
+  idJugador: number;
+  ocultarDocumento = true;
+  edicion: boolean;
   jugadorForm: FormGroup;
   seleccionadoPosicion: string;
   seleccionadoPieHabil: string;
   listaPosiciones: string[] = ['Portero', 'Defensa', 'Mediocampista', 'Delantero'];
   listaPieHabil: string[] = ['Derecho', 'Izquierdo'];
 
-  constructor(protected jugadorService: JugadorService) { }
+  constructor(protected jugadorService: JugadorService,
+              protected mensajeService: MensajeService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(){
     this.construirFormularioProducto();
+    this.route.params.subscribe((params: Params) => {
+      this.id = params['id'];
+      this.edicion = params['id'] != null;
+    });
+    if (this.edicion === true) {
+      this.cargarDatos();
+      this.ocultarDocumento = false;
+    }
   }
 
   crear(){
@@ -43,8 +59,33 @@ export class CrearJugadorComponent implements OnInit {
     jugador.altura = this.jugadorForm.value['altura'];
     jugador.posicion = this.jugadorForm.value['posicion'];
     jugador.pieHabil = this.jugadorForm.value['pieHabil'];
-    this.jugadorService.guardar(jugador).subscribe(() => {
-      this.jugadorForm.reset();
+
+    if (this.edicion === true){
+      console.log(this.idJugadorRetorno);
+      jugador.id = this.idJugadorRetorno;
+      this.jugadorService.actualizar(jugador, this.idJugadorRetorno).subscribe(() => {
+        this.jugadorForm.reset();
+        this.mensajeService.openSnackBar('Jugador editado satisfactoriamente', 'Success');
+      });
+    } else {
+      this.jugadorService.guardar(jugador).subscribe(() => {
+        this.jugadorForm.reset();
+        this.mensajeService.openSnackBar('Jugador agregado satisfactoriamente', 'Success');
+      });
+    }
+  }
+
+  cargarDatos(){
+    this.jugadorService.obtenerPorDocumento(this.id).subscribe(data => {
+      this.idJugador = data.id;
+      this.jugadorForm.get('documento').setValue(data.documento);
+      this.jugadorForm.get('nombre').setValue(data.nombre);
+      this.jugadorForm.get('apellido').setValue(data.apellido);
+      this.jugadorForm.get('fechaNacimiento').setValue(data.fechaNacimiento);
+      this.jugadorForm.get('peso').setValue(data.peso);
+      this.jugadorForm.get('altura').setValue(data.altura);
+      this.jugadorForm.get('posicion').setValue(data.posicion);
+      this.jugadorForm.get('pieHabil').setValue(data.pieHabil);
     });
   }
 
@@ -66,6 +107,10 @@ export class CrearJugadorComponent implements OnInit {
       'pieHabil': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                           Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)])
     });
+  }
+
+  get idJugadorRetorno(){
+    return this.idJugador;
   }
 
   get documento(){

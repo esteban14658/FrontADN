@@ -10,6 +10,7 @@ import { JugadorService } from '../../shared/service/jugador.service';
 import { Jugador } from '@shared/model/jugador';
 import { SharedModule } from '@shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from '@home/home.component';
 
 
 describe('ListarJugadorComponent', () => {
@@ -29,7 +30,10 @@ describe('ListarJugadorComponent', () => {
             HttpClientModule,
             RouterTestingModule,
             SharedModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            RouterTestingModule.withRoutes([
+                { path: 'home', component: HomeComponent}
+            ])
         ],
         providers: [JugadorService, HttpService]
         })

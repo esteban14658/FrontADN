@@ -8,6 +8,7 @@ import { ErrorCamposPlantillaComponent } from './directivas/error-campos/compone
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TrackByPipe } from './pipe/track-by.pipe';
 import { MaterialModule } from '@core/_material/_material.module';
+import { MensajeService } from './services/mensaje.service';
 
 @NgModule({
   declarations: [
@@ -33,5 +34,6 @@ import { MaterialModule } from '@core/_material/_material.module';
     FormsModule,
     TrackByPipe
   ],
+  providers: [MensajeService]
 })
 export class SharedModule { }

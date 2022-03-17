@@ -57,7 +57,7 @@ describe('CrearAsistenciaComponent', () => {
 
     it('deberia seleccionar todos', () => {
         const retorno = component.isAllSelected();
-        expect(true).toBe(retorno);
+        expect(false).toBe(retorno);
     });
 
     it('Registrando asistencias', () => {

@@ -40,6 +40,9 @@ describe('CrearJugadorComponent', () => {
     spyOn(jugadorService, 'guardar').and.returnValue(
       of(true)
     );
+    spyOn(jugadorService, 'actualizar').and.returnValue(
+      of(true)
+    );
     fixture.detectChanges();
   });
 
@@ -53,15 +56,14 @@ describe('CrearJugadorComponent', () => {
 
   it('Registrando jugador', () => {
     expect(component.jugadorForm.valid).toBeFalsy();
-    component.jugadorForm.controls.id.setValue(1);
-    component.jugadorForm.controls.documento.setValue(10101020);
-    component.jugadorForm.controls.nombre.setValue('Ricardo');
-    component.jugadorForm.controls.apellido.setValue('Marquez');
-    component.jugadorForm.controls.fechaNacimiento.setValue('2013-02-13');
-    component.jugadorForm.controls.peso.setValue(45.7);
-    component.jugadorForm.controls.altura.setValue(1.84);
-    component.jugadorForm.controls.posicion.setValue('Delantero');
-    component.jugadorForm.controls.pieHabil.setValue('Derecho');
+    component.jugadorForm.get('documento').setValue(102998883);
+    component.jugadorForm.get('nombre').setValue('Carlos');
+    component.jugadorForm.get('apellido').setValue('Farias');
+    component.jugadorForm.get('fechaNacimiento').setValue('2012-02-01');
+    component.jugadorForm.get('peso').setValue(54.2);
+    component.jugadorForm.get('altura').setValue(1.72);
+    component.jugadorForm.get('posicion').setValue('Delantero');
+    component.jugadorForm.get('pieHabil').setValue('Derecho');
     expect(component.jugadorForm.valid).toBeTruthy();
 
     component.crear();

@@ -16,6 +16,10 @@ const routes: Routes = [
       {
         path: 'listar',
         component: ListarJugadorComponent
+      },
+      {
+        path: 'edicion/:id',
+        component: CrearJugadorComponent
       }
     ]
   }

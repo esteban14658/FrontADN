@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
 import { Jugador } from '../../../../shared/model/jugador';
 import { environment } from 'src/environments/environment';
-import { HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 const FECHA_INICIAL = 2010;
 const FECHA_FINAL = 2030;
@@ -12,7 +12,8 @@ export class JugadorService {
   private url  = `${environment.apiUrl}/jugadores`;
   listaJugador: Jugador[];
 
-  constructor(protected http: HttpService) { }
+  constructor(protected http: HttpService,
+              protected httpClient: HttpClient) { }
 
   public consultar(){
     return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
@@ -36,7 +37,11 @@ export class JugadorService {
 
   public guardar(jugador: Jugador) {
     return this.http.doPost<Jugador, boolean>(`${this.url}`, jugador,
-                                                this.http.optsName('crear/actualizar jugadores'));
+                                                this.http.optsName('crear jugadores'));
+  }
+
+  public actualizar(jugador: Jugador, id: number){
+    return this.httpClient.put<boolean>(`${this.url}/${id}`, jugador);
   }
 
   public eliminar(id: number) {

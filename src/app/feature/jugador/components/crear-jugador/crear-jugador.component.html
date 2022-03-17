@@ -1,9 +1,11 @@
 <p>crear-jugador works!</p>
 <form [formGroup]="jugadorForm" (ngSubmit)="crear()" id="jugadorForm">
 
-  <mat-form-field >
-    <input validar matInput type="number" placeholder="Documento"  formControlName="documento" maxlength="20" class="form-control" id="documento">
-  </mat-form-field>
+  <div *ngIf="ocultarDocumento">
+    <mat-form-field >
+      <input validar matInput type="number" placeholder="Documento"  formControlName="documento" maxlength="20" class="form-control" id="documento">
+    </mat-form-field>
+  </div>
   <br>
   
   <mat-form-field >
