@@ -40,6 +40,7 @@ export class ListarFacturaComponent implements OnInit {
       this.router.navigateByUrl('/home', { replaceUrl: true });
       this.mensajeService.openSnackBar('Factura eliminada correctamente', 'Success');
     });
+    return true;
   }
 
   mostrarDialogo(id: number): void {

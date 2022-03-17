@@ -43,12 +43,25 @@ describe('ListarFacturaComponent', () => {
         spyOn(service, 'consultar').and.returnValue(
         of(listaFacturas)
         );
+        spyOn(service, 'eliminar').and.returnValue(
+        of(true)
+        );
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
         expect(2).toBe(component.listarFacturas.length);
+    });
+
+    it('deberia listar las facturas', () => {
+        const lista = component.listarFacturas;
+        expect(lista.length).toBe(component.listarFacturas.length);
+    });
+
+    it('deberia eliminar', () => {
+        const retorno = component.eliminar(1);
+        expect(retorno).toBe(true);
     });
 
 });
