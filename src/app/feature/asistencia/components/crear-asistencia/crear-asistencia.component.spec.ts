@@ -44,12 +44,24 @@ describe('CrearAsistenciaComponent', () => {
         spyOn(asistenciaService, 'listarJugadoresSinAsistencia').and.returnValue(
         of(listaJugadores)
         );
+        spyOn(asistenciaService, 'guardar').and.returnValue(
+        of(true)
+        );
         fixture.detectChanges();
     });
 
     it('should create', () => {
         expect(component).toBeTruthy();
-        expect(2).toBe(component.listaJugadores.length);
+        expect(3).toBe(component.listaJugadores.length);
+    });
+
+    it('Registrando asistencias', () => {
+        let jugador = new Jugador(1);
+        component.listaJugadores.push(jugador);
+        const retorno = component.agregar();
+  
+        expect(true).toBe(retorno);
+
     });
 
 });

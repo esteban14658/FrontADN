@@ -59,8 +59,10 @@ export class CrearFacturaComponent implements OnInit {
         this.mensajeService.openSnackBar('Factura creada correctamente', 'Success');
         this.router.navigateByUrl('/home', { replaceUrl: true });
       });
+      return true;
     } else {
       this.router.navigateByUrl('/home', { replaceUrl: true });
+      return false;
     }
   }
 

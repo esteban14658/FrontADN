@@ -66,6 +66,7 @@ export class CrearAsistenciaComponent implements OnInit {
       });
     });
     this.router.navigateByUrl('/home', { replaceUrl: true });
+    return true;
   }
 
   showOptions(event: MatCheckboxChange, id: number) {

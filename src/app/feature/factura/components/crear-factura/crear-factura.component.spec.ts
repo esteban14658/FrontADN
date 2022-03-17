@@ -63,7 +63,9 @@ describe('CrearFacturaComponent', () => {
       component.facturaForm.controls.meses.setValue(3);
       component.facturaForm.controls.descripcion.setValue('Tres meses');
 
-      component.crear();
+      const retorno = component.crear();
+
+      expect(true).toBe(retorno);
 
       // Aca validamos el resultado esperado al enviar la petición
       // TODO adicionar expect
