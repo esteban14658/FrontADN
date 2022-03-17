@@ -59,10 +59,10 @@ export class CrearAsistenciaComponent implements OnInit {
     });
   }
 
-  async agregar(){
-    this.listaDeId.forEach(async x => {
+  agregar(){
+    this.listaDeId.forEach(x => {
       this.asistencia.jugador.id = x;
-      await this.asistenciaService.guardar(this.asistencia).subscribe(() => {
+      this.asistenciaService.guardar(this.asistencia).subscribe(() => {
       });
     });
     this.router.navigateByUrl('/home', { replaceUrl: true });

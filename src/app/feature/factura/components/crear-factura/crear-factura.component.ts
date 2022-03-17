@@ -65,7 +65,6 @@ export class CrearFacturaComponent implements OnInit {
   }
 
   construirFormulario(){
-    console.warn('Entro al componente');
     this.facturaForm = new FormGroup({
       jugador: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
