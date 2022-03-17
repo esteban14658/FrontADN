@@ -18,10 +18,6 @@ export class JugadorService {
     return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
   }
 
-  public listarJugadoresSinAsistencia(){
-    return this.http.doGet<Jugador[]>(`${this.url}/asistencia`, this.http.optsName('consultar jugadores sin asistencia'));
-  }
-
   public equipoAleatorio(defensas: string, mediocampistas: string, delanteros: string){
     const envioDtoPosiciones = new HttpParams()
                 .set('defensas', defensas)
