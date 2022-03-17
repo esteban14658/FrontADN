@@ -75,6 +75,24 @@ describe('ListarJugadorComponent', () => {
         expect(true).toBe(lista.closed.valueOf());
     });
 
+    it('deberia restar los inputs ocultos', () => {
+        const inputDefensas = 1;
+        const inputMediocampistas = 2;
+        const inputDelanteros = 3;
+        const defensas = 4;
+        const mediocampistas = 4;
+        const delanteros = 2;
+        component.defensas = defensas;
+        component.mediocampistas = mediocampistas;
+        component.delanteros = delanteros;
+        const resta1 = component.restar(inputDefensas);
+        const resta2 = component.restar(inputMediocampistas);
+        const resta3 = component.restar(inputDelanteros);
+        const cantidadJugadoresDeCampo = 10;
+        const total = cantidadJugadoresDeCampo - resta1 - resta2 - resta3;
+        expect(0).toBe(total);
+    });
+
     it('deberia eliminar', () => {
         const retorno = component.eliminar(1);
         expect(retorno).toBe(true);

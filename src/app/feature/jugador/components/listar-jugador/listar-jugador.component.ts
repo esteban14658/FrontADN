@@ -143,13 +143,7 @@ export class ListarJugadorComponent implements OnInit {
     else if (condicion === inputDelanteros){
       this.cantidadEquipo = cantidadDeJugadores - this.mediocampistas - this.defensas;
     }
-  }
-
-  filtrar(){
-    return this.jugadorService.consultar().subscribe(data => {
-      this.listaJugadores = data.filter(fitro =>
-        fitro.posicion === 'posicion');
-    });
+    return this.cantidadEquipo;
   }
 
   eliminar(id: number){
