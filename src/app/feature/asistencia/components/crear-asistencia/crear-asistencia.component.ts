@@ -5,8 +5,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
-import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.service';
+import { Jugador } from '@shared/model/jugador';
 import { Asistencia } from '../../shared/model/asistencia';
 import { AsistenciaService } from '../../shared/service/asistencia.service';
 
@@ -25,7 +24,7 @@ export class CrearAsistenciaComponent implements OnInit {
   myDate = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   jugador: Jugador = new Jugador(1);
   asistencia: Asistencia = new Asistencia(0, this.myDate, this.jugador);
-  displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento', 
+  displayedColumns: string[] = ['select', 'documento', 'nombre', 'apellido', 'fechaNacimiento',
                                 'peso', 'altura', 'posicion'];
   dataSource = new MatTableDataSource<Jugador>();
   selection = new SelectionModel<Jugador>(true, []);
@@ -33,7 +32,6 @@ export class CrearAsistenciaComponent implements OnInit {
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   constructor(protected asistenciaService: AsistenciaService,
-              protected jugadorService: JugadorService, 
               protected router: Router) { }
 
   ngOnInit(){
@@ -53,11 +51,11 @@ export class CrearAsistenciaComponent implements OnInit {
   }
 
   listarJugadores(){
-    return this.jugadorService.listarJugadoresSinAsistencia().subscribe(data => {
+    return this.asistenciaService.listarJugadoresSinAsistencia().subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.sort = this.sort;
       this.listaJugadores = data;
-      
+
     });
   }
 
@@ -70,17 +68,19 @@ export class CrearAsistenciaComponent implements OnInit {
     this.router.navigateByUrl('/home', { replaceUrl: true });
   }
 
-  showOptions(event:MatCheckboxChange, id: number) {
+  showOptions(event: MatCheckboxChange, id: number) {
     if (event.checked === true){
       this.listaDeId.push(id);
     } else {
-      this.listaDeId.forEach((element,index)=>{
-        if(element==id) this.listaDeId.splice(index,1);
+      this.listaDeId.forEach((element, index) => {
+        if (element === id) {
+          this.listaDeId.splice(index, 1);
+        }
       });
-    }    
+    }
   }
 
-  showsOptions(event:MatCheckboxChange): void {
+  showsOptions(event: MatCheckboxChange): void {
     this.listaDeId = [];
     this.masterToggle();
     if (event.checked === true){

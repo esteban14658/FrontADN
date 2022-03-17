@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpService } from 'src/app/core/services/http.service';
 import { ListarJugadorComponent } from './listar-jugador.component';
 import { JugadorService } from '../../shared/service/jugador.service';
-import { Jugador } from '../../shared/model/jugador';
+import { Jugador } from '@shared/model/jugador';
 import { SharedModule } from '@shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -59,24 +59,24 @@ describe('ListarJugadorComponent', () => {
 
     it('deberia listar por categoria', () => {
         const fecha = '2010';
-        let lista = component.elegirCategoria(fecha);
+        const lista = component.elegirCategoria(fecha);
         expect(true).toBe(lista.closed.valueOf());
     });
 
     it('deberia listar por posicion', () => {
         const posicion = 'Delantero';
-        let lista = component.elegirPosicion(posicion);
-        expect(true).toBe(lista.closed.valueOf());
+        const lista = component.elegirPosicion(posicion);
+        expect(lista.unsubscribe.length).toBe(component.listaJugadores.length);
     });
 
     it('deberia listar por pie habil', () => {
         const pieHabil = 'Derecho';
-        let lista = component.elegirPieHabil(pieHabil);
+        const lista = component.elegirPieHabil(pieHabil);
         expect(true).toBe(lista.closed.valueOf());
     });
 
     it('deberia eliminar', () => {
-        component.eliminar(1);
-        expect(true).toBeTrue;
+        const retorno = component.eliminar(1);
+        expect(retorno).toBe(true);
     });
 });

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
-import { Jugador } from '../model/jugador';
+import { Jugador } from '../../../../shared/model/jugador';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 
@@ -49,7 +49,7 @@ export class JugadorService {
   }
 
   public listaDeAnios(){
-    let array = new Array();
+    const array = new Array();
     let j = 0;
     for (let i = FECHA_INICIAL; i < FECHA_FINAL; i++){
       array[j] = i.toString();

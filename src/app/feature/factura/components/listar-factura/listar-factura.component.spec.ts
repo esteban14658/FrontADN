@@ -1,15 +1,15 @@
-import { CommonModule } from "@angular/common";
-import { HttpClientModule } from "@angular/common/http";
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpService } from "@core/services/http.service";
-import { SharedModule } from "@shared/shared.module";
-import { of } from "rxjs";
-import { Jugador } from "src/app/feature/jugador/shared/model/jugador";
-import { Factura } from "../../shared/model/factura";
-import { FacturaService } from "../../shared/service/factura.service";
-import { ListarFacturaComponent } from "./listar-factura.component";
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpService } from '@core/services/http.service';
+import { SharedModule } from '@shared/shared.module';
+import { of } from 'rxjs';
+import { Jugador } from '@shared/model/jugador';
+import { Factura } from '../../shared/model/factura';
+import { FacturaService } from '../../shared/service/factura.service';
+import { ListarFacturaComponent } from './listar-factura.component';
 
 
 describe('ListarFacturaComponent', () => {
@@ -17,7 +17,7 @@ describe('ListarFacturaComponent', () => {
     let fixture: ComponentFixture<ListarFacturaComponent>;
     let service: FacturaService;
     const listaFacturas: any[] = [
-        new Factura(1, new Jugador(1), 'Un mes', 1), 
+        new Factura(1, new Jugador(1), 'Un mes', 1),
         new Factura(2, new Jugador(2), 'Un mes', 1)
       ];
 
@@ -27,8 +27,8 @@ describe('ListarFacturaComponent', () => {
         imports: [
             CommonModule,
             HttpClientModule,
-            RouterTestingModule, 
-            SharedModule, 
+            RouterTestingModule,
+            SharedModule,
             BrowserAnimationsModule
         ],
         providers: [FacturaService, HttpService]

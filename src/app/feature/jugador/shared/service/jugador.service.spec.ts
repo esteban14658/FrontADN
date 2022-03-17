@@ -5,7 +5,7 @@ import { JugadorService } from './jugador.service';
 import { environment } from 'src/environments/environment';
 import { HttpService } from 'src/app/core/services/http.service';
 import { HttpResponse } from '@angular/common/http';
-import { Jugador } from '../model/jugador';
+import { Jugador } from '../../../../shared/model/jugador';
 
 describe('JugadorService', () => {
   let httpMock: HttpTestingController;
@@ -78,21 +78,6 @@ describe('JugadorService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(dummyJugadores);
   });
-
-  it('deberia listar jugadores sin asistencias', () => {
-    const dummyJugadores = [
-      new Jugador(2),
-      new Jugador(3),
-      new Jugador(4)
-    ];
-    service.listarJugadoresSinAsistencia().subscribe(respuesta => {
-      expect(respuesta.length).toBe(3);
-      expect(respuesta).toEqual(dummyJugadores);
-    });
-    const req = httpMock.expectOne(`${apiEndpointJugadores}/asistencia`);
-    expect(req.request.method).toBe('GET');
-    req.flush(dummyJugadores);
-});
 
   it('deberia obtener un jugador', () => {
     const jugador = new Jugador(1);

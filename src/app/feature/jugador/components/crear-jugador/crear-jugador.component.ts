@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Jugador } from '../../shared/model/jugador';
+import { Jugador } from '../../../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 
 const LONGITUD_MINIMA_PERMITIDA_TEXTO = 3;
@@ -26,7 +26,7 @@ export class CrearJugadorComponent implements OnInit {
   }
 
   crear(){
-    let jugador = new Jugador(
+    const jugador = new Jugador(
       this.jugadorForm.value['id']
     );
     jugador.documento = this.jugadorForm.value['documento'];

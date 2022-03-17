@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { Jugador } from '@shared/model/jugador';
 import { environment } from 'src/environments/environment';
 import { Factura } from '../model/factura';
 

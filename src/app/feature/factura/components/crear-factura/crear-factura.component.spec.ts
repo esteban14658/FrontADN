@@ -8,7 +8,7 @@ import { HttpService } from '@core/services/http.service';
 import { SharedModule } from '@shared/shared.module';
 import { of } from 'rxjs';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { Jugador } from '@shared/model/jugador';
 import { FacturaService } from '../../shared/service/factura.service';
 import { CrearFacturaComponent } from './crear-factura.component';
 

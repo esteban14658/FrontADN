@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { HttpService } from '@core/services/http.service';
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { Jugador } from '@shared/model/jugador';
 import { environment } from 'src/environments/environment';
 import { Factura } from '../model/factura';
 import { FacturaService } from './factura.service';
@@ -72,12 +72,12 @@ describe('FacturaService', () => {
     it('deberia eliminar un jugador', () => {
       const jugador = new Jugador(1);
       const dummyFactura = new Factura(1, jugador, 'Tres meses', 3);
-        service.eliminar(dummyFactura.id).subscribe((respuesta) => {
-          expect(respuesta).toEqual(true);
-        });
-        const req = httpMock.expectOne(`${apiEndpointFacturas}/1`);
-        expect(req.request.method).toBe('DELETE');
-        req.event(new HttpResponse<boolean>({body: true}));
+      service.eliminar(dummyFactura.id).subscribe((respuesta) => {
+        expect(respuesta).toEqual(true);
+      });
+      const req = httpMock.expectOne(`${apiEndpointFacturas}/1`);
+      expect(req.request.method).toBe('DELETE');
+      req.event(new HttpResponse<boolean>({body: true}));
     });
 
 });

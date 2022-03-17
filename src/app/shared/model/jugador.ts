@@ -10,7 +10,7 @@ export class Jugador{
     posicion: string;
     pieHabil: string;
     seleccionado: boolean;
-    
+
     constructor(id: number){
         this.id = id;
     }

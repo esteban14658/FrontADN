@@ -24,8 +24,8 @@ describe('CrearJugadorComponent', () => {
         HttpClientModule,
         RouterTestingModule,
         ReactiveFormsModule,
-        FormsModule, 
-        SharedModule, 
+        FormsModule,
+        SharedModule,
         BrowserAnimationsModule
       ],
       providers: [JugadorService, HttpService],

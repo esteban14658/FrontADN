@@ -1,4 +1,4 @@
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
+import { Jugador } from '@shared/model/jugador';
 
 export class Factura{
     id: number;

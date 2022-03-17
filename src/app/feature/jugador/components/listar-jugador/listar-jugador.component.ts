@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { MensajeService } from '@core/services/mensaje.service';
 import { DtoPosiciones } from '../../shared/model/dtoPosiciones';
-import { Jugador } from '../../shared/model/jugador';
+import { Jugador } from '../../../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 import { BorrarJugadorComponent } from '../borrar-jugador/borrar-jugador.component';
 
@@ -29,7 +29,7 @@ export class ListarJugadorComponent implements OnInit {
                                 'peso', 'altura', 'posicion', 'acciones'];
   dataSource = new MatTableDataSource<Jugador>();
   panelOpenState = false;
-  listaGeneral: string[] = ['Listar todos', 'Equipo aleatorio', 'Listar por posicion', 'Listar por pie habil', 
+  listaGeneral: string[] = ['Listar todos', 'Equipo aleatorio', 'Listar por posicion', 'Listar por pie habil',
                           'Listar por categoria'];
   listaPosiciones: string[] = ['Portero', 'Defensa', 'Mediocampista', 'Delantero'];
   listaPieHabil: string[] = ['Derecho', 'Izquierdo'];
@@ -147,7 +147,7 @@ export class ListarJugadorComponent implements OnInit {
 
   filtrar(){
     return this.jugadorService.consultar().subscribe(data => {
-      this.listaJugadores = data.filter(fitro => 
+      this.listaJugadores = data.filter(fitro =>
         fitro.posicion === 'posicion');
     });
   }
@@ -157,6 +157,7 @@ export class ListarJugadorComponent implements OnInit {
       this.router.navigateByUrl('/home', { replaceUrl: true });
       this.mensajeService.openSnackBar('Jugador eliminado corretamente', 'Success');
     });
+    return true;
   }
 
   mostrarDialogo(id: number): void {

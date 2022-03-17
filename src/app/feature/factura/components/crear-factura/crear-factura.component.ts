@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Jugador } from 'src/app/feature/jugador/shared/model/jugador';
-import { JugadorService } from 'src/app/feature/jugador/shared/service/jugador.service';
+import { Jugador } from '@shared/model/jugador';
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { formatDate } from '@angular/common';
@@ -20,8 +19,7 @@ const SEIS_MESES = 6;
 })
 export class CrearFacturaComponent implements OnInit {
 
-  constructor(protected facturaService: FacturaService, 
-              protected jugadorService: JugadorService,
+  constructor(protected facturaService: FacturaService,
               protected mensajeService: MensajeService,
               private router: Router) { }
 
@@ -46,7 +44,7 @@ export class CrearFacturaComponent implements OnInit {
   }
 
   crear(){
-    let factura = new Factura(1,
+    const factura = new Factura(1,
       this.seleccionado,
       this.facturaForm.value['descripcion'],
       this.facturaForm.value['meses']);
@@ -67,6 +65,7 @@ export class CrearFacturaComponent implements OnInit {
   }
 
   construirFormulario(){
+    console.warn('Entro al componente');
     this.facturaForm = new FormGroup({
       jugador: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
