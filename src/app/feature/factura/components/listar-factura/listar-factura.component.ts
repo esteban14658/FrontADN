@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { MensajeService } from '@core/services/mensaje.service';
+import { MensajeService } from '@shared/services/mensaje.service';
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { BorrarFacturaComponent } from '../borrar-factura/borrar-factura.component';

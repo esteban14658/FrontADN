@@ -10,7 +10,7 @@ import { HttpService } from './services/http.service';
 import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './_material/_material.module';
-import { MensajeService } from './services/mensaje.service';
+import { MensajeService } from '@shared/services/mensaje.service';
 
 @NgModule({
   declarations: [ToolbarComponent, NavbarComponent],

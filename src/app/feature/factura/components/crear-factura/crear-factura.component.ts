@@ -6,12 +6,14 @@ import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
-import { MensajeService } from '@core/services/mensaje.service';
+import { MensajeService } from '@shared/services/mensaje.service';
 
 const UN_MES = 1;
 const TRES_MESES = 3;
 const SEIS_MESES = 6;
 
+const INGRESO_MAXIMO_CARACTERES = 30;
+const INGRESO_MINIMO_CARACTERES = 5;
 @Component({
   selector: 'app-crear-factura',
   templateUrl: './crear-factura.component.html',
@@ -68,9 +70,9 @@ export class CrearFacturaComponent implements OnInit {
 
   construirFormulario(){
     this.facturaForm = new FormGroup({
-      jugador: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required]),
-      meses: new FormControl('', [Validators.required, Validators.min(1),
+      'jugador': new FormControl('', [Validators.required]),
+      'descripcion': new FormControl('', [Validators.required, Validators.minLength(INGRESO_MINIMO_CARACTERES), Validators.maxLength(INGRESO_MAXIMO_CARACTERES)]),
+      'meses': new FormControl('', [Validators.required, Validators.min(1),
                                   Validators.max(SEIS_MESES)])
     });
   }

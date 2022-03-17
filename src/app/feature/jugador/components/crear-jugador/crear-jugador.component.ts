@@ -6,6 +6,12 @@ import { JugadorService } from '../../shared/service/jugador.service';
 const LONGITUD_MINIMA_PERMITIDA_TEXTO = 3;
 const LONGITUD_MAXIMA_PERMITIDA_TEXTO = 20;
 
+const VALOR_MINIMO_PERMITIDO_DE_PESO = 25;
+const VALOR_MAXIMO_PERMITIDO_DE_PESO = 300;
+const VALOR_MINIMO_PERMITIDO_DE_ALTURA = 0.5;
+const VALOR_MAXIMO_PERMITIDO_DE_ALTURA = 3;
+const VALOR_MAXIMO_PERMITIDO_DE_DOCUMENTO = 999999999;
+const VALOR_MINIMO_PERMITIDO_DE_DOCUMENTO = 10000000;
 @Component({
   selector: 'app-crear-jugador',
   templateUrl: './crear-jugador.component.html',
@@ -44,18 +50,20 @@ export class CrearJugadorComponent implements OnInit {
 
   private construirFormularioProducto() {
     this.jugadorForm = new FormGroup({
-      id: new FormControl('', [Validators.required]),
-      documento: new FormControl('', [Validators.required]),
-      nombre: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      'documento': new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_DOCUMENTO),
+                                                              Validators.max(VALOR_MAXIMO_PERMITIDO_DE_DOCUMENTO)]),
+      'nombre': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                         Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)]),
-      apellido: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      'apellido': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                           Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)]),
-      fechaNacimiento: new FormControl('', [Validators.required]),
-      peso: new FormControl('', [Validators.required]),
-      altura: new FormControl('', [Validators.required]),
-      posicion: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      'fechaNacimiento': new FormControl('', [Validators.required]),
+      'peso': new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_PESO), 
+                                                        Validators.max(VALOR_MAXIMO_PERMITIDO_DE_PESO)]),
+      'altura': new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_ALTURA), 
+                                                          Validators.max(VALOR_MAXIMO_PERMITIDO_DE_ALTURA)]),
+      'posicion': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                         Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)]),
-      pieHabil: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      'pieHabil': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                           Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)])
     });
   }

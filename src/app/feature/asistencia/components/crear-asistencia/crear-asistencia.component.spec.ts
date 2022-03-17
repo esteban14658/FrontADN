@@ -55,8 +55,13 @@ describe('CrearAsistenciaComponent', () => {
         expect(2).toBe(component.listaJugadores.length);
     });
 
+    it('deberia seleccionar todos', () => {
+        const retorno = component.isAllSelected();
+        expect(true).toBe(retorno);
+    });
+
     it('Registrando asistencias', () => {
-        let jugador = new Jugador(1);
+        const jugador = new Jugador(1);
         component.listaJugadores.push(jugador);
         const retorno = component.agregar();
   

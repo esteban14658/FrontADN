@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { MensajeService } from '@core/services/mensaje.service';
+import { MensajeService } from '@shared/services/mensaje.service';
 import { DtoPosiciones } from '../../shared/model/dtoPosiciones';
 import { Jugador } from '../../../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
@@ -13,12 +13,14 @@ const cantidadDeJugadores = 10;
 const NUMERO_INICIAL_DEFENSAS = 4;
 const NUMERO_INCIAL_MEDIOCAMPISTAS = 4;
 const NUMERO_INICIAL_DELANTEROS = 2;
+const enum SeleccionGeneral{
+  listarTodos = 'Listar todos',
+  listarEquipo = 'Equipo aleatorio',
+  listarPorPosicion = 'Listar por posicion',
+  listarPorPieHabil = 'Listar por pie habil',
+  listarPorCategoria = 'Listar por categoria'
+}
 
-const POSICION = 'Listar por posicion';
-const PIE_HABIL = 'Listar por pie habil';
-const CATEGORIA = 'Listar por categoria';
-const LISTAR_TODOS = 'Listar todos';
-const EQUIPO_ALEATORIO = 'Equipo aleatorio';
 @Component({
   selector: 'app-listar-jugador',
   templateUrl: './listar-jugador.component.html',
@@ -70,29 +72,29 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   filtro(eleccion: string, dto: DtoPosiciones){
-    if (eleccion === LISTAR_TODOS){
+    if (eleccion === SeleccionGeneral.listarTodos){
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = false;
       this.jugadorService.consultar().subscribe(data => {
         this.llenarDatasource(data);
       });
-    } else if (eleccion === POSICION){
+    } else if (eleccion === SeleccionGeneral.listarPorPosicion){
       this.mostrarDatosPosicion = true;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = false;
       this.elegirPosicion(this.seleccionadoPosicion);
-    } else if (eleccion === PIE_HABIL){
+    } else if (eleccion === SeleccionGeneral.listarPorPieHabil){
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = true;
       this.mostrarDatosCategoria = false;
       this.elegirPieHabil(this.seleccionadoPieHabil);
-    } else if (eleccion === CATEGORIA){
+    } else if (eleccion === SeleccionGeneral.listarPorCategoria){
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = true;
       this.elegirCategoria(this.seleccionadoCategoria);
-    } else if (eleccion === EQUIPO_ALEATORIO){
+    } else if (eleccion === SeleccionGeneral.listarEquipo){
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = false;

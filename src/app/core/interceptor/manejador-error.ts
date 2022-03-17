@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
-import { MensajeService } from '@core/services/mensaje.service';
+import { MensajeService } from '@shared/services/mensaje.service';
 import { environment } from '../../../environments/environment';
 import { HTTP_ERRORES_CODIGO } from './http-codigo-error';
 

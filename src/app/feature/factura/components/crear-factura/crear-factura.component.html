@@ -2,7 +2,7 @@
 <form [formGroup]="facturaForm"  (ngSubmit)="crear()" id="facturaForm">
     <mat-form-field>
         <mat-label>Jugadores sin mensualidad activa</mat-label>
-        <mat-select [(ngModel)]="seleccionado" formControlName="jugador" id="jugador">
+        <mat-select validar [(ngModel)]="seleccionado" formControlName="jugador" id="jugador">
           <mat-option *ngFor="let item of displayedJugadores " [value]="item">
             {{item.id}} {{item.documento}} {{item.nombre}} {{item.apellido}}
           </mat-option>
@@ -11,7 +11,7 @@
     
     <mat-form-field>
         <mat-label>Meses</mat-label>
-        <mat-select [(ngModel)]="seleccionMeses" formControlName="meses" id="meses">
+        <mat-select validar [(ngModel)]="seleccionMeses" formControlName="meses" id="meses">
             <mat-option *ngFor="let item of meses " [value]="item">
             {{item}}
             </mat-option>
@@ -24,7 +24,7 @@
     </mat-form-field>
     <br>
   
-    <button mat-raised-button color="primary" type="submit" id="registrarFactura">
+    <button mat-raised-button color="primary" type="submit" id="registrarFactura" [disabled]="!facturaForm.valid">
       <mat-icon>done</mat-icon>
       <span>Guardar</span>
     </button>

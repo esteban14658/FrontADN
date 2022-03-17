@@ -27,7 +27,7 @@
   <mat-label>Tipo de lista</mat-label>
   <mat-select [(ngModel)]="seleccionado" (selectionChange)="elegirTipoDeLista($event.value)" 
     id="tipoDeLista">
-    <mat-option *ngFor="let item of listaGeneral " [value]="item">
+    <mat-option *ngFor="let item of listaGeneral" [value]="item">
       {{item}}
     </mat-option>
   </mat-select>

@@ -2,17 +2,17 @@
 <form [formGroup]="jugadorForm" (ngSubmit)="crear()" id="jugadorForm">
 
   <mat-form-field >
-    <input validar matInput placeholder="10101010"  formControlName="documento" maxlength="20" class="form-control" id="documento">
+    <input validar matInput type="number" placeholder="Documento"  formControlName="documento" maxlength="20" class="form-control" id="documento">
   </mat-form-field>
   <br>
   
   <mat-form-field >
-    <input validar matInput placeholder="Juanito"  formControlName="nombre" maxlength="20" class="form-control" id="nombre">
+    <input validar matInput placeholder="Nombre"  formControlName="nombre" maxlength="20" class="form-control" id="nombre">
   </mat-form-field>
   <br>
 
   <mat-form-field >
-    <input validar matInput placeholder="Perez"  formControlName="apellido" maxlength="20" class="form-control" id="apellido">
+    <input validar matInput placeholder="Apellido"  formControlName="apellido" maxlength="20" class="form-control" id="apellido">
   </mat-form-field>
   <br>
 
@@ -22,18 +22,18 @@
   <br>
 
   <mat-form-field >
-    <input validar matInput type="text" placeholder="50.7"  formControlName="peso" maxlength="20" class="form-control" id="peso">
+    <input validar matInput type="number" placeholder="50.7"  formControlName="peso" min="30" max="300" class="form-control" id="peso">
   </mat-form-field>
   <br>
 
   <mat-form-field >
-    <input validar matInput type="text" placeholder="1.87"  formControlName="altura" maxlength="20" class="form-control" id="altura">
+    <input validar matInput type="number" placeholder="Altura ejem:(1.87)"  formControlName="altura" min="0.5" max="3" class="form-control" id="altura">
   </mat-form-field>
   <br>
 
   <mat-form-field>
     <mat-label>Posiciones</mat-label>
-    <mat-select [(ngModel)]="seleccionadoPosicion"
+    <mat-select validar [(ngModel)]="seleccionadoPosicion"
     formControlName="posicion" class="form-control" id="posicion">
       <mat-option *ngFor="let item of listaPosiciones " [value]="item">
         {{item}}
@@ -44,7 +44,7 @@
 
   <mat-form-field>
     <mat-label>Pie habil</mat-label>
-    <mat-select [(ngModel)]="seleccionadoPieHabil"
+    <mat-select validar [(ngModel)]="seleccionadoPieHabil"
     formControlName="pieHabil" class="form-control" id="pieHabil">
       <mat-option *ngFor="let item of listaPieHabil " [value]="item">
         {{item}}
@@ -53,7 +53,7 @@
   </mat-form-field>
   <br>
 
-  <button mat-raised-button color="primary" type="submit" id="registrarJugador">
+  <button mat-raised-button color="primary" type="submit" id="registrarJugador" [disabled]="!jugadorForm.valid">
     <mat-icon>done</mat-icon>
     <span>Guardar</span>
   </button>
