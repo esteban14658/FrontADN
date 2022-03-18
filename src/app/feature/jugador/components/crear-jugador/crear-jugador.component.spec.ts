@@ -10,12 +10,13 @@ import { CrearJugadorComponent } from './crear-jugador.component';
 import { JugadorService } from '../../shared/service/jugador.service';
 import { SharedModule } from '@shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Jugador } from '@shared/model/jugador';
 
 describe('CrearJugadorComponent', () => {
   let component: CrearJugadorComponent;
   let fixture: ComponentFixture<CrearJugadorComponent>;
   let jugadorService: JugadorService;
-
+  let jugador = new Jugador(1);
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CrearJugadorComponent ],
@@ -37,6 +38,9 @@ describe('CrearJugadorComponent', () => {
     fixture = TestBed.createComponent(CrearJugadorComponent);
     component = fixture.componentInstance;
     jugadorService = TestBed.inject(JugadorService);
+    spyOn(jugadorService, 'obtenerPorDocumento').and.returnValue(
+      of(jugador)
+    );
     spyOn(jugadorService, 'guardar').and.returnValue(
       of(true)
     );
@@ -70,5 +74,10 @@ describe('CrearJugadorComponent', () => {
 
     // Aca validamos el resultado esperado al enviar la petición
     // TODO adicionar expect
+  });
+
+  it ('deberia cargar los datos en cada campo', () => {
+    component.cargarDatos();
+    expect(1).toBe(jugador.id);
   });
 });

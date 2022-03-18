@@ -61,7 +61,6 @@ export class CrearJugadorComponent implements OnInit {
     jugador.pieHabil = this.jugadorForm.value['pieHabil'];
 
     if (this.edicion === true){
-      console.log(this.idJugadorRetorno);
       jugador.id = this.idJugadorRetorno;
       this.jugadorService.actualizar(jugador, this.idJugadorRetorno).subscribe(() => {
         this.jugadorForm.reset();

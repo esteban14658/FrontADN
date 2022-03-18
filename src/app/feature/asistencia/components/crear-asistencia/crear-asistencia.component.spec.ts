@@ -52,7 +52,7 @@ describe('CrearAsistenciaComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-        expect(2).toBe(component.listaJugadores.length);
+        expect(component.listaJugadores.length).toBeGreaterThan(1);
     });
 
     it('deberia seleccionar todos', () => {

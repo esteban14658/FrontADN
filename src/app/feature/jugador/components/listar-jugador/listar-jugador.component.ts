@@ -8,6 +8,7 @@ import { DtoPosiciones } from '../../shared/model/dtoPosiciones';
 import { Jugador } from '../../../../shared/model/jugador';
 import { JugadorService } from '../../shared/service/jugador.service';
 import { BorrarJugadorComponent } from '../borrar-jugador/borrar-jugador.component';
+import { PageEvent } from '@angular/material/paginator';
 
 const cantidadDeJugadores = 10;
 const NUMERO_INICIAL_DEFENSAS = 4;
@@ -23,6 +24,8 @@ const enum SeleccionGeneral{
 
 const DOCIENTOS_REGISTROS = 200;
 const PAGINA_CERO = 0;
+const NUMERO_MAXIMO_REGISTROS = 1000;
+const REGISTROS_INICIALES = 25;
 @Component({
   selector: 'app-listar-jugador',
   templateUrl: './listar-jugador.component.html',
@@ -46,9 +49,9 @@ export class ListarJugadorComponent implements OnInit {
   mostrarDatosPosicion = false;
   mostrarDatosPieHabil = false;
   mostrarDatosCategoria = false;
-  cantidad = 25;
+  cantidad = REGISTROS_INICIALES;
   pageIndex = 0;
-  pageSize = 25;
+  pageSize = REGISTROS_INICIALES;
 
   defensas = NUMERO_INICIAL_DEFENSAS;
   mediocampistas = NUMERO_INCIAL_MEDIOCAMPISTAS;
@@ -154,7 +157,8 @@ export class ListarJugadorComponent implements OnInit {
     return this.cantidadEquipo;
   }
 
-  cambiarPagina(e: any) {
+  cambiarPagina(e: PageEvent) {
+    
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
     const dto = new DtoPosiciones(this.defensas.toString(),
@@ -171,7 +175,7 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   obtenerMaximoRegistroDeDatos(){
-    this.jugadorService.consultar(1000, 0).subscribe(data => {
+    this.jugadorService.consultar(NUMERO_MAXIMO_REGISTROS, 0).subscribe(data => {
       this.cantidad = data.length;
     });
   }
