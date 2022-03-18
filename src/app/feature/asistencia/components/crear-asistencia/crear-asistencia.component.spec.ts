@@ -10,6 +10,7 @@ import { Jugador } from '@shared/model/jugador';
 import { Asistencia } from '../../shared/model/asistencia';
 import { AsistenciaService } from '../../shared/service/asistencia.service';
 import { CrearAsistenciaComponent } from './crear-asistencia.component';
+import { HomeComponent } from '@home/home.component';
 
 
 describe('CrearAsistenciaComponent', () => {
@@ -30,7 +31,10 @@ describe('CrearAsistenciaComponent', () => {
             HttpClientModule,
             RouterTestingModule,
             SharedModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            RouterTestingModule.withRoutes([
+                { path: 'home', component: HomeComponent}
+            ])
         ],
         providers: [AsistenciaService, HttpService]
         })

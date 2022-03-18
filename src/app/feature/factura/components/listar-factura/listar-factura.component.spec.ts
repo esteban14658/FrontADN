@@ -10,6 +10,7 @@ import { Jugador } from '@shared/model/jugador';
 import { Factura } from '../../shared/model/factura';
 import { FacturaService } from '../../shared/service/factura.service';
 import { ListarFacturaComponent } from './listar-factura.component';
+import { HomeComponent } from '@home/home.component';
 
 
 describe('ListarFacturaComponent', () => {
@@ -29,7 +30,10 @@ describe('ListarFacturaComponent', () => {
             HttpClientModule,
             RouterTestingModule,
             SharedModule,
-            BrowserAnimationsModule
+            BrowserAnimationsModule,
+            RouterTestingModule.withRoutes([
+                { path: 'home', component: HomeComponent}
+            ])
         ],
         providers: [FacturaService, HttpService]
         })

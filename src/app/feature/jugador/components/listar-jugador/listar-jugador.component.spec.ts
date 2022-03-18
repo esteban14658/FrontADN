@@ -48,6 +48,9 @@ describe('ListarJugadorComponent', () => {
         spyOn(jugadorService, 'consultar').and.returnValue(
         of(listaJugadores)
         );
+        spyOn(jugadorService, 'equipoAleatorio').and.returnValue(
+        of(listaJugadores)
+        );
         spyOn(jugadorService, 'listarPorCategoria').and.returnValue(
         of(listaJugadores)
         );
@@ -65,19 +68,19 @@ describe('ListarJugadorComponent', () => {
     it('deberia listar por categoria', () => {
         const fecha = '2010';
         const lista = component.elegirCategoria(fecha);
-        expect(true).toBe(lista.closed.valueOf());
+        expect(lista.unsubscribe.length).toBeGreaterThanOrEqual(0);
     });
 
     it('deberia listar por posicion', () => {
         const posicion = 'Delantero';
         const lista = component.elegirPosicion(posicion);
-        expect(true).toBe(lista.closed.valueOf());
+        expect(lista.unsubscribe.length).toBeGreaterThanOrEqual(0);
     });
 
     it('deberia listar por pie habil', () => {
         const pieHabil = 'Derecho';
         const lista = component.elegirPieHabil(pieHabil);
-        expect(true).toBe(lista.closed.valueOf());
+        expect(lista.unsubscribe.length).toBeGreaterThanOrEqual(0);
     });
 
     it('deberia restar los inputs ocultos', () => {
