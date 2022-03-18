@@ -99,8 +99,8 @@ describe('ListarJugadorComponent', () => {
     });
 
     it('deberia eliminar', () => {
-        component.eliminar(1);
-        expect(component).toBeTruthy();
+        const retorno = component.eliminar(1);
+        expect(retorno).toBe(true);
     });
 
     it('deberia elegir dentro del filtro si se elige listar todos' , () => {
