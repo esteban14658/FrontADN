@@ -71,7 +71,7 @@ describe('ListarJugadorComponent', () => {
     it('deberia listar por posicion', () => {
         const posicion = 'Delantero';
         const lista = component.elegirPosicion(posicion);
-        expect(lista.unsubscribe.length).toBe(component.listaJugadores.length);
+        expect(true).toBe(lista.closed.valueOf());
     });
 
     it('deberia listar por pie habil', () => {
