@@ -11,6 +11,7 @@ import { Jugador } from '@shared/model/jugador';
 import { SharedModule } from '@shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from '@home/home.component';
+import { DtoPosiciones } from '../../shared/model/dtoPosiciones';
 
 
 describe('ListarJugadorComponent', () => {
@@ -98,7 +99,34 @@ describe('ListarJugadorComponent', () => {
     });
 
     it('deberia eliminar', () => {
-        const retorno = component.eliminar(1);
-        expect(retorno).toBe(true);
+        component.eliminar(1);
+        expect(component).toBeTruthy();
     });
+
+    it('deberia elegir dentro del filtro si se elige listar todos' , () => {
+        component.filtro('Listar todos', new DtoPosiciones('4', '4', '2'));
+        expect(component).toBeTruthy();
+    });
+
+    it('deberia elegir dentro del filtro si se elige Equipo aleatorio' , () => {
+        component.filtro('Equipo aleatorio', new DtoPosiciones('4', '4', '2'));
+        expect(component).toBeTruthy();
+    });
+
+    it('deberia elegir dentro del filtro si se elige Listar por posicion' , () => {
+        component.filtro('Listar por posicion', new DtoPosiciones('4', '4', '2'));
+        expect(component).toBeTruthy();
+    });
+
+    it('deberia elegir dentro del filtro si se elige Listar por pie habil' , () => {
+        component.filtro('Listar por pie habil', new DtoPosiciones('4', '4', '2'));
+        expect(component).toBeTruthy();
+    });
+
+    it('deberia elegir dentro del filtro si se elige Listar por categoria' , () => {
+        component.filtro('Listar por categoria', new DtoPosiciones('4', '4', '2'));
+        expect(component).toBeTruthy();
+    });
+
+
 });
