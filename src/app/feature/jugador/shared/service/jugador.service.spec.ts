@@ -10,7 +10,6 @@ import { Jugador } from '../../../../shared/model/jugador';
 describe('JugadorService', () => {
   let httpMock: HttpTestingController;
   let service: JugadorService;
-  const apiEndpointJugadorConsulta = `${environment.apiUrl}/jugadores`;
   const apiEndpointJugadores = `${environment.apiUrl}/jugadores`;
 
   beforeEach(() => {
@@ -32,11 +31,11 @@ describe('JugadorService', () => {
       new Jugador(1),
       new Jugador(2)
     ];
-    service.consultar().subscribe(jugadores => {
+    service.consultar(100, 0).subscribe(jugadores => {
       expect(jugadores.length).toBe(2);
       expect(jugadores).toEqual(dummyJugadores);
     });
-    const req = httpMock.expectOne(apiEndpointJugadorConsulta);
+    const req = httpMock.expectOne(`${apiEndpointJugadores}/100/0`);
     expect(req.request.method).toBe('GET');
     req.flush(dummyJugadores);
   });

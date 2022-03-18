@@ -57,7 +57,7 @@ describe('CrearFacturaComponent', () => {
     });
 
     it('Registrando jugador', () => {
-      let jugador = new Jugador(1);
+      const jugador = new Jugador(1);
       expect(component.facturaForm.valid).toBeFalsy();
       component.facturaForm.controls.jugador.setValue(jugador);
       component.facturaForm.controls.meses.setValue(3);

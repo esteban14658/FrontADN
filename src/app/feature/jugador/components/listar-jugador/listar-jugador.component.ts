@@ -21,6 +21,8 @@ const enum SeleccionGeneral{
   listarPorCategoria = 'Listar por categoria'
 }
 
+const DOCIENTOS_REGISTROS = 200;
+const PAGINA_CERO = 0;
 @Component({
   selector: 'app-listar-jugador',
   templateUrl: './listar-jugador.component.html',
@@ -44,6 +46,9 @@ export class ListarJugadorComponent implements OnInit {
   mostrarDatosPosicion = false;
   mostrarDatosPieHabil = false;
   mostrarDatosCategoria = false;
+  cantidad = 25;
+  pageIndex = 0;
+  pageSize = 25;
 
   defensas = NUMERO_INICIAL_DEFENSAS;
   mediocampistas = NUMERO_INCIAL_MEDIOCAMPISTAS;
@@ -60,7 +65,7 @@ export class ListarJugadorComponent implements OnInit {
   ngOnInit(){
     this.elegirTipoDeLista(this.seleccionado);
     this.lista = this.jugadorService.listaDeAnios();
-    this.jugadorService.consultar().subscribe(data => {
+    this.jugadorService.consultar(this.pageSize, this.pageIndex).subscribe(data => {
       this.listaJugadores = data;
     });
    }
@@ -76,9 +81,7 @@ export class ListarJugadorComponent implements OnInit {
       this.mostrarDatosPosicion = false;
       this.mostrarDatosPieHabil = false;
       this.mostrarDatosCategoria = false;
-      this.jugadorService.consultar().subscribe(data => {
-        this.llenarDatasource(data);
-      });
+      this.listarPaginado();
     } else if (eleccion === SeleccionGeneral.listarPorPosicion){
       this.mostrarDatosPosicion = true;
       this.mostrarDatosPieHabil = false;
@@ -106,22 +109,25 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   elegirPosicion(value: string){
-    return this.jugadorService.consultar().subscribe(data => {
+    return this.jugadorService.consultar(DOCIENTOS_REGISTROS, PAGINA_CERO).subscribe(data => {
       this.listaJugadores = data.filter(fitro => fitro.posicion === value);
       this.llenarDatasource(this.listaJugadores);
+      this.cantidad = data.length;
     });
   }
 
   elegirPieHabil(value: string){
-    return this.jugadorService.consultar().subscribe(data => {
+    return this.jugadorService.consultar(DOCIENTOS_REGISTROS, PAGINA_CERO).subscribe(data => {
       this.listaJugadores = data.filter(filtro => filtro.pieHabil === value);
       this.llenarDatasource(this.listaJugadores);
+      this.cantidad = data.length;
     });
   }
 
   elegirCategoria(value: string){
     return this.jugadorService.listarPorCategoria(value).subscribe(data => {
       this.llenarDatasource(data);
+      this.cantidad = data.length;
     });
   }
 
@@ -146,6 +152,28 @@ export class ListarJugadorComponent implements OnInit {
       this.cantidadEquipo = cantidadDeJugadores - this.mediocampistas - this.defensas;
     }
     return this.cantidadEquipo;
+  }
+
+  cambiarPagina(e: any) {
+    this.pageIndex = e.pageIndex;
+    this.pageSize = e.pageSize;
+    const dto = new DtoPosiciones(this.defensas.toString(),
+                                  this.mediocampistas.toString(),
+                                  this.delanteros.toString());
+    this.filtro(this.seleccionado , dto);
+  }
+
+  listarPaginado(){
+    this.obtenerMaximoRegistroDeDatos();
+    this.jugadorService.consultar(this.pageSize, this.pageIndex).subscribe(data => {
+      this.llenarDatasource(data);
+    });
+  }
+
+  obtenerMaximoRegistroDeDatos(){
+    this.jugadorService.consultar(1000, 0).subscribe(data => {
+      this.cantidad = data.length;
+    });
   }
 
   eliminar(id: number){

@@ -15,8 +15,8 @@ export class JugadorService {
   constructor(protected http: HttpService,
               protected httpClient: HttpClient) { }
 
-  public consultar(){
-    return this.http.doGet<Jugador[]>(`${this.url}`, this.http.optsName('consultar jugadores'));
+  public consultar(pagina: number, cantidad: number){
+    return this.http.doGet<Jugador[]>(`${this.url}/${pagina}/${cantidad}`, this.http.optsName('consultar jugadores'));
   }
 
   public equipoAleatorio(defensas: string, mediocampistas: string, delanteros: string){

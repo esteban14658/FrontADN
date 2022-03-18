@@ -91,20 +91,20 @@ export class CrearJugadorComponent implements OnInit {
 
   private construirFormularioProducto() {
     this.jugadorForm = new FormGroup({
-      'documento': new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_DOCUMENTO),
+      documento: new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_DOCUMENTO),
                                                               Validators.max(VALOR_MAXIMO_PERMITIDO_DE_DOCUMENTO)]),
-      'nombre': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      nombre: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                         Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)]),
-      'apellido': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      apellido: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                           Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)]),
-      'fechaNacimiento': new FormControl('', [Validators.required]),
-      'peso': new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_PESO), 
+      fechaNacimiento: new FormControl('', [Validators.required]),
+      peso: new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_PESO),
                                                         Validators.max(VALOR_MAXIMO_PERMITIDO_DE_PESO)]),
-      'altura': new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_ALTURA), 
+      altura: new FormControl('', [Validators.required, Validators.min(VALOR_MINIMO_PERMITIDO_DE_ALTURA),
                                                           Validators.max(VALOR_MAXIMO_PERMITIDO_DE_ALTURA)]),
-      'posicion': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      posicion: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                         Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)]),
-      'pieHabil': new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
+      pieHabil: new FormControl('', [Validators.required, Validators.minLength(LONGITUD_MINIMA_PERMITIDA_TEXTO),
                                                           Validators.maxLength(LONGITUD_MAXIMA_PERMITIDA_TEXTO)])
     });
   }

@@ -70,9 +70,10 @@ export class CrearFacturaComponent implements OnInit {
 
   construirFormulario(){
     this.facturaForm = new FormGroup({
-      'jugador': new FormControl('', [Validators.required]),
-      'descripcion': new FormControl('', [Validators.required, Validators.minLength(INGRESO_MINIMO_CARACTERES), Validators.maxLength(INGRESO_MAXIMO_CARACTERES)]),
-      'meses': new FormControl('', [Validators.required, Validators.min(1),
+      jugador: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required, Validators.minLength(INGRESO_MINIMO_CARACTERES),
+                                                              Validators.maxLength(INGRESO_MAXIMO_CARACTERES)]),
+      meses: new FormControl('', [Validators.required, Validators.min(1),
                                   Validators.max(SEIS_MESES)])
     });
   }

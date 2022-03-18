@@ -29,7 +29,7 @@ describe('BorrarFacturaComponent', () => {
       ],
       providers: [
         { provide: MatDialogRef, useValue: dialogMock },
-        { provide: MAT_DIALOG_DATA, useValue: [] } 
+        { provide: MAT_DIALOG_DATA, useValue: [] }
       ]
     })
     .compileComponents();

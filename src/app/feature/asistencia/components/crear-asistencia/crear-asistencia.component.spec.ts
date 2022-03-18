@@ -61,10 +61,10 @@ describe('CrearAsistenciaComponent', () => {
     });
 
     it('Registrando asistencias', () => {
-        const jugador = new Jugador(1);
-        component.listaJugadores.push(jugador);
+        const jugadorRegistro = new Jugador(1);
+        component.listaJugadores.push(jugadorRegistro);
         const retorno = component.agregar();
-  
+
         expect(true).toBe(retorno);
 
     });
