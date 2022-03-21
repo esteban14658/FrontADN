@@ -16,7 +16,7 @@ describe('CrearJugadorComponent', () => {
   let component: CrearJugadorComponent;
   let fixture: ComponentFixture<CrearJugadorComponent>;
   let jugadorService: JugadorService;
-  let jugador = new Jugador(1);
+  const jugador = new Jugador(1);
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ CrearJugadorComponent ],

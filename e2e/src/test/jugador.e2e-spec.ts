@@ -18,7 +18,7 @@ describe('workspace-project Jugador', () => {
     });
 
     it('Deberia crear jugador', () => {
-        const DOCUMENTO = 11111;
+        const DOCUMENTO = 111111111;
         const NOMBRE = 'Esteban';
         const APELLIDO = 'Beltran';
         const FECHA_NACIMIENTO = '11-02-2022';

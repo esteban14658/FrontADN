@@ -21,6 +21,26 @@ const enum SeleccionGeneral{
   listarPorPieHabil = 'Listar por pie habil',
   listarPorCategoria = 'Listar por categoria'
 }
+const enum DespliegueDeColumnas{
+  documento = 'documento',
+  nombre = 'nombre',
+  apellido = 'apellido',
+  fechaNacimiento = 'fechaNacimiento',
+  peso = 'peso',
+  altura = 'altura',
+  posicion = 'posicion',
+  acciones = 'acciones'
+}
+const enum Posiciones{
+  Portero = 'Portero',
+  defensa = 'Defensa',
+  Mediocampista = 'Mediocampista',
+  delantero = 'Delantero'
+}
+const enum PieHabil{
+  derecho = 'Derecho',
+  izquierdo = 'Izquierdo'
+}
 
 const DOCIENTOS_REGISTROS = 200;
 const PAGINA_CERO = 0;
@@ -32,14 +52,15 @@ const REGISTROS_INICIALES = 25;
   styleUrls: ['./listar-jugador.component.css']
 })
 export class ListarJugadorComponent implements OnInit {
-  displayedColumns: string[] = ['documento', 'nombre', 'apellido', 'fechaNacimiento',
-                                'peso', 'altura', 'posicion', 'acciones'];
+  displayedColumns: string[] = [DespliegueDeColumnas.documento, DespliegueDeColumnas.nombre, DespliegueDeColumnas.apellido,
+                                DespliegueDeColumnas.fechaNacimiento, DespliegueDeColumnas.peso, DespliegueDeColumnas.altura,
+                                DespliegueDeColumnas.posicion, DespliegueDeColumnas.acciones];
   dataSource = new MatTableDataSource<Jugador>();
   panelOpenState = false;
-  listaGeneral: string[] = ['Listar todos', 'Equipo aleatorio', 'Listar por posicion', 'Listar por pie habil',
-                          'Listar por categoria'];
-  listaPosiciones: string[] = ['Portero', 'Defensa', 'Mediocampista', 'Delantero'];
-  listaPieHabil: string[] = ['Derecho', 'Izquierdo'];
+  listaGeneral: string[] = [SeleccionGeneral.listarTodos, SeleccionGeneral.listarEquipo, SeleccionGeneral.listarPorPosicion,
+                            SeleccionGeneral.listarPorPieHabil, SeleccionGeneral.listarPorCategoria];
+  listaPosiciones: string[] = [Posiciones.Portero, Posiciones.defensa, Posiciones.Mediocampista, Posiciones.delantero];
+  listaPieHabil: string[] = [PieHabil.derecho, PieHabil.izquierdo];
   listaJugadores: Jugador[];
   lista: number[];
   seleccionado: string;
@@ -158,7 +179,6 @@ export class ListarJugadorComponent implements OnInit {
   }
 
   cambiarPagina(e: PageEvent) {
-    
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
     const dto = new DtoPosiciones(this.defensas.toString(),

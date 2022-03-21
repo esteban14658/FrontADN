@@ -32,9 +32,9 @@ export class ManejadorError implements ErrorHandler {
       mensaje,
     };
     if (!environment.production) {
-      this.mensajeService.openSnackBar(respuesta.mensaje.error.mensaje, 'Failed');
       window.console.error('Error inesperado:\n', respuesta);
     }
+    this.mensajeService.openSnackBar(respuesta.mensaje.error.mensaje, 'Failed');
   }
 
   public obtenerErrorHttpCode(httpCode: number): string {
